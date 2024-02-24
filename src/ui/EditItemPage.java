@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -86,12 +87,20 @@ public class EditItemPage extends JFrame {
 		passwordLbl.setForeground(new Color(192, 192, 192));
 		JPasswordField passwordTxtField = new JPasswordField();
 		passwordTxtField.setFont(bodyFont);
-		passwordTxtField.setBounds(16, 200, 465, 40);
+		passwordTxtField.setBounds(16, 200, 365, 40);
 		passwordTxtField.setForeground(new Color(192, 192, 192));
 		passwordTxtField.setBackground(new Color(96, 96, 96));
 		passwordTxtField.setBorder(new EmptyBorder(10, 10, 10, 10));
 		passwordTxtField.setCaretColor(Color.white);
 		passwordTxtField.setText(item.getPassword());
+		ImageIcon visibilityOnIcon = new ImageIcon("src/resources/visibility_on.png");
+		ImageIcon visibilityOffIcon = new ImageIcon("src/resources/visibility_off.png");
+		JLabel togglePasswordVisibilityIcon = new JLabel(visibilityOnIcon);
+		togglePasswordVisibilityIcon.setOpaque(true);
+		togglePasswordVisibilityIcon.setBounds(380, 200, 50, 40);
+		togglePasswordVisibilityIcon.setBackground(new Color(192, 192, 192));
+		togglePasswordVisibilityIcon.setForeground(new Color(56, 56, 56));
+		togglePasswordVisibilityIcon.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, new Color(128, 128, 128)));
 		
 		JLabel urlLbl = new JLabel("URL");
 		urlLbl.setFont(bodyFont);
@@ -116,6 +125,7 @@ public class EditItemPage extends JFrame {
 		panel1.add(usernameTxtField);
 		panel1.add(passwordLbl);
 		panel1.add(passwordTxtField);
+		panel1.add(togglePasswordVisibilityIcon);
 		panel1.add(urlLbl);
 		panel1.add(urlTxtField);
 		
@@ -173,6 +183,43 @@ public class EditItemPage extends JFrame {
             	loggedInPageJFrame.setEnabled(true);
             }
         });
+		
+		togglePasswordVisibilityIcon.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (passwordTxtField.getEchoChar() == 0) {
+					passwordTxtField.setEchoChar('•');
+					togglePasswordVisibilityIcon.setIcon(visibilityOnIcon);
+				} else {
+					passwordTxtField.setEchoChar((char)0);
+					togglePasswordVisibilityIcon.setIcon(visibilityOffIcon);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				togglePasswordVisibilityIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				togglePasswordVisibilityIcon.setBackground(new Color(156, 156, 156));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				togglePasswordVisibilityIcon.setBackground(new Color(192, 192, 192));
+			}
+		});
 		
 		saveBtn.addMouseListener(new MouseListener() {
 			@Override
