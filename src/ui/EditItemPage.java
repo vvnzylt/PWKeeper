@@ -19,24 +19,31 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import backend.ItemDetails;
+import backend.PasswordGenerator;
 
 public class EditItemPage extends JFrame {
+	private Image icon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
+	private Font headingFont = new Font("Helvetica", Font.BOLD, 18);
+	private Font bodyFont = new Font("Helvetica", Font.PLAIN, 16);
+	private	JPasswordField passwordTxtField = new JPasswordField();
+	private String generatedPassword;
+	
 	public EditItemPage(JFrame loggedInPageJFrame, ItemDetails item) {
 		initializeUI(loggedInPageJFrame, item);
 	}
 	
 	private void initializeUI(JFrame loggedInPageJFrame, ItemDetails item) {
 		loggedInPageJFrame.setEnabled(false);
-		
-		Image icon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
-		Font headingFont = new Font("Helvetica", Font.BOLD, 18);
-		Font bodyFont = new Font("Helvetica", Font.PLAIN, 16);
 		
 		setSize(720, 600);
 		setIconImage(icon);
@@ -85,7 +92,6 @@ public class EditItemPage extends JFrame {
 		passwordLbl.setFont(bodyFont);
 		passwordLbl.setBounds(15, 170, 90, 30);
 		passwordLbl.setForeground(new Color(192, 192, 192));
-		JPasswordField passwordTxtField = new JPasswordField();
 		passwordTxtField.setFont(bodyFont);
 		passwordTxtField.setBounds(16, 200, 365, 40);
 		passwordTxtField.setForeground(new Color(192, 192, 192));
@@ -101,6 +107,12 @@ public class EditItemPage extends JFrame {
 		togglePasswordVisibilityIcon.setBackground(new Color(192, 192, 192));
 		togglePasswordVisibilityIcon.setForeground(new Color(56, 56, 56));
 		togglePasswordVisibilityIcon.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, new Color(128, 128, 128)));
+		ImageIcon generateIcon = new ImageIcon("src/resources/generate.png");
+		JLabel generatePasswordDialogBtn = new JLabel(generateIcon);
+		generatePasswordDialogBtn.setOpaque(true);
+		generatePasswordDialogBtn.setBounds(430, 200, 50, 40);
+		generatePasswordDialogBtn.setBackground(new Color(192, 192, 192));
+		generatePasswordDialogBtn.setForeground(new Color(56, 56, 56));
 		
 		JLabel urlLbl = new JLabel("URL");
 		urlLbl.setFont(bodyFont);
@@ -126,6 +138,7 @@ public class EditItemPage extends JFrame {
 		panel1.add(passwordLbl);
 		panel1.add(passwordTxtField);
 		panel1.add(togglePasswordVisibilityIcon);
+		panel1.add(generatePasswordDialogBtn);
 		panel1.add(urlLbl);
 		panel1.add(urlTxtField);
 		
@@ -221,6 +234,37 @@ public class EditItemPage extends JFrame {
 			}
 		});
 		
+		generatePasswordDialogBtn.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				showPasswordGeneratorDialog();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				generatePasswordDialogBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				generatePasswordDialogBtn.setBackground(new Color(156, 156, 156));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				generatePasswordDialogBtn.setBackground(new Color(192, 192, 192));
+			}
+		});
+		
 		saveBtn.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -266,6 +310,116 @@ public class EditItemPage extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				saveBtn.setBackground(null);
+			}
+		});
+	}
+	
+	private void showPasswordGeneratorDialog() {
+		EditItemPage.this.setEnabled(false);
+		JFrame frame = new JFrame();
+		
+		frame.setIconImage(icon);
+		frame.setLocation(700, 330);
+		frame.setSize(330, 270);
+		frame.setVisible(true);
+		frame.getContentPane().setBackground(new Color(26, 26, 26));
+		frame.setTitle("Generate a password");
+		frame.setLayout(null);
+		frame.setResizable(false);
+		
+		JLabel infoLbl = new JLabel("Generate a strong password");
+		infoLbl.setFont(bodyFont);
+		infoLbl.setBounds(55, 15, 250, 50);
+		infoLbl.setForeground(new Color(228, 228, 228));
+		
+		JSlider slider = new JSlider();
+		slider.setOrientation(JSlider.HORIZONTAL);
+		slider.setMinimum(8);
+		slider.setMaximum(64);
+		slider.setValue(8);
+		slider.setBounds(85, 55, 150, 30);
+		slider.setBackground(null);
+        
+		JLabel generatedPasswordLbl = new JLabel();
+		generatedPasswordLbl.setFont(headingFont);
+		generatedPasswordLbl.setBounds(30, 100, 270, 20);
+		generatedPasswordLbl.setForeground(new Color(228, 228, 228));
+//		generatedPasswordLbl.setOpaque(true);
+//		generatedPasswordLbl.setBackground(new Color(192, 192, 192));
+//		generatedPasswordLbl.setForeground(new Color(56, 56, 56));
+		generatedPasswordLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		generatedPasswordLbl.setVerticalAlignment(SwingConstants.CENTER);
+        
+		JLabel numberOfCharactersLbl = new JLabel();
+		numberOfCharactersLbl.setFont(bodyFont);
+		numberOfCharactersLbl.setBounds(85, 125, 150, 20);
+		numberOfCharactersLbl.setForeground(new Color(192, 192, 192));
+//		numberOfCharactersLbl.setOpaque(true);
+//		numberOfCharactersLbl.setBackground(new Color(192, 192, 192));
+//		numberOfCharactersLbl.setForeground(new Color(56, 56, 56));
+		numberOfCharactersLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		numberOfCharactersLbl.setVerticalAlignment(SwingConstants.CENTER);
+		
+		JButton generatePasswordDialogBtn = new JButton("Use this");
+		generatePasswordDialogBtn.setFont(bodyFont);
+		generatePasswordDialogBtn.setBounds(115, 180, 90, 30);
+		generatePasswordDialogBtn.setBackground(new Color (40, 40, 40));
+		generatePasswordDialogBtn.setForeground(new Color(192, 192, 192));
+		generatePasswordDialogBtn.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
+		generatePasswordDialogBtn.setFocusPainted(false);
+		
+		frame.add(infoLbl);
+		frame.add(slider);
+		frame.add(generatedPasswordLbl);
+		frame.add(numberOfCharactersLbl);
+		frame.add(generatePasswordDialogBtn);
+		
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				EditItemPage.this.setEnabled(true);
+			}
+		});
+		
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				int value = slider.getValue();
+				
+				generatedPassword = PasswordGenerator.generatePassword(value);
+				numberOfCharactersLbl.setText(value + " characters");
+				generatedPasswordLbl.setText(generatedPassword);
+			}
+		});
+		
+		generatePasswordDialogBtn.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				passwordTxtField.setText(generatedPassword);
+				EditItemPage.this.setEnabled(true);
+				frame.dispose();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				generatePasswordDialogBtn.setBackground(new Color (60, 60, 60));
+				generatePasswordDialogBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				generatePasswordDialogBtn.setBackground(new Color (40, 40, 40));
 			}
 		});
 	}
