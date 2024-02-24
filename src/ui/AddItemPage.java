@@ -35,7 +35,7 @@ import backend.AccountDB;
 import backend.PasswordGenerator;
 
 public class AddItemPage extends JFrame {
-	private Image icon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");;
+	private Image icon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
 	private Font headingFont = new Font("Helvetica", Font.BOLD, 18);
 	private Font bodyFont = new Font("Helvetica", Font.PLAIN, 16);
 	private	JPasswordField passwordTxtField = new JPasswordField();
