@@ -109,11 +109,11 @@ public class AddItemPage extends JFrame {
 		togglePasswordVisibilityIcon.setForeground(new Color(56, 56, 56));
 		togglePasswordVisibilityIcon.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, new Color(128, 128, 128)));
 		ImageIcon generateIcon = new ImageIcon("src/resources/generate.png");
-		JLabel useThisBtn = new JLabel(generateIcon);
-		useThisBtn.setOpaque(true);
-		useThisBtn.setBounds(430, 200, 50, 40);
-		useThisBtn.setBackground(new Color(192, 192, 192));
-		useThisBtn.setForeground(new Color(56, 56, 56));
+		JLabel generatePasswordDialogBtn = new JLabel(generateIcon);
+		generatePasswordDialogBtn.setOpaque(true);
+		generatePasswordDialogBtn.setBounds(430, 200, 50, 40);
+		generatePasswordDialogBtn.setBackground(new Color(192, 192, 192));
+		generatePasswordDialogBtn.setForeground(new Color(56, 56, 56));
 		
 		JLabel urlLbl = new JLabel("URL");
 		urlLbl.setFont(bodyFont);
@@ -138,7 +138,7 @@ public class AddItemPage extends JFrame {
 		panel1.add(passwordLbl);
 		panel1.add(passwordTxtField);
 		panel1.add(togglePasswordVisibilityIcon);
-		panel1.add(useThisBtn);
+		panel1.add(generatePasswordDialogBtn);
 		panel1.add(urlLbl);
 		panel1.add(urlTxtField);
 		
@@ -233,7 +233,7 @@ public class AddItemPage extends JFrame {
 			}
 		});
 		
-		useThisBtn.addMouseListener(new MouseListener() {
+		generatePasswordDialogBtn.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				showPasswordGeneratorDialog();
@@ -254,13 +254,13 @@ public class AddItemPage extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				useThisBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				useThisBtn.setBackground(new Color(156, 156, 156));
+				generatePasswordDialogBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				generatePasswordDialogBtn.setBackground(new Color(156, 156, 156));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				useThisBtn.setBackground(new Color(192, 192, 192));
+				generatePasswordDialogBtn.setBackground(new Color(192, 192, 192));
 			}
 		});
 		
@@ -359,19 +359,19 @@ public class AddItemPage extends JFrame {
 		numberOfCharactersLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		numberOfCharactersLbl.setVerticalAlignment(SwingConstants.CENTER);
 		
-		JButton useThisBtn = new JButton("Use this");
-		useThisBtn.setFont(bodyFont);
-		useThisBtn.setBounds(115, 180, 90, 30);
-		useThisBtn.setBackground(new Color (40, 40, 40));
-		useThisBtn.setForeground(new Color(192, 192, 192));
-		useThisBtn.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
-		useThisBtn.setFocusPainted(false);
+		JButton generatePasswordDialogBtn = new JButton("Use this");
+		generatePasswordDialogBtn.setFont(bodyFont);
+		generatePasswordDialogBtn.setBounds(115, 180, 90, 30);
+		generatePasswordDialogBtn.setBackground(new Color (40, 40, 40));
+		generatePasswordDialogBtn.setForeground(new Color(192, 192, 192));
+		generatePasswordDialogBtn.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
+		generatePasswordDialogBtn.setFocusPainted(false);
 		
 		frame.add(infoLbl);
 		frame.add(slider);
 		frame.add(generatedPasswordLbl);
 		frame.add(numberOfCharactersLbl);
-		frame.add(useThisBtn);
+		frame.add(generatePasswordDialogBtn);
 		
 		frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -390,7 +390,7 @@ public class AddItemPage extends JFrame {
 			}
 		});
 		
-		useThisBtn.addMouseListener(new MouseListener() {
+		generatePasswordDialogBtn.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				passwordTxtField.setText(generatedPassword);
@@ -412,13 +412,13 @@ public class AddItemPage extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				useThisBtn.setBackground(new Color (60, 60, 60));
-				useThisBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				generatePasswordDialogBtn.setBackground(new Color (60, 60, 60));
+				generatePasswordDialogBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				useThisBtn.setBackground(new Color (40, 40, 40));
+				generatePasswordDialogBtn.setBackground(new Color (40, 40, 40));
 			}
 		});
 	}
