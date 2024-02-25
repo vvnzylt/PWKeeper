@@ -6,6 +6,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
@@ -23,6 +27,7 @@ import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
@@ -54,19 +59,54 @@ public class EditItemPage extends JFrame {
 		setVisible(true);
 		
 		JPanel mainPanel = new JPanel();
-		
 		JLabel editItemHeading = new JLabel("EDIT ITEM");
+		JPanel panel1 = new JPanel();
+		JLabel itemNameLbl = new JLabel("Item name");
+		JTextField itemNameTxtField = new JTextField();
+		JLabel usernameLbl = new JLabel("Username");
+		JTextField usernameTxtField = new JTextField();
+		JLabel passwordLbl = new JLabel("Password");
+		ImageIcon visibilityOnIcon = new ImageIcon(new ImageIcon("src/resources/visibility_on.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		ImageIcon visibilityOffIcon = new ImageIcon(new ImageIcon("src/resources/visibility_off.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		JLabel togglePasswordVisibilityIcon = new JLabel(visibilityOnIcon);
+		ImageIcon generateIcon = new ImageIcon(new ImageIcon("src/resources/generate.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		JLabel generatePasswordDialogBtn = new JLabel(generateIcon);
+		JLabel urlLbl = new JLabel("URL");
+		JTextField urlTxtField = new JTextField();
+		JLabel notesHeading = new JLabel("NOTES");
+		JTextArea notesTxtArea = new JTextArea();
+		JScrollPane notesTxtAreaPane = new JScrollPane(notesTxtArea);
+		JButton saveBtn = new JButton("Save");
+		JScrollPane panel1Scroll = new JScrollPane(mainPanel);
+		
+		KeyListener keyListener = new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (e.getKeyChar() == '\n') {
+					saveBtn.doClick();
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+
 		editItemHeading.setFont(headingFont);
 		editItemHeading.setForeground(new Color(192, 192, 192));
 		editItemHeading.setBounds(110, 30, 100, 50);
 		
-		JPanel panel1 = new JPanel();
-		
-		JLabel itemNameLbl = new JLabel("Item name");
 		itemNameLbl.setFont(bodyFont);
 		itemNameLbl.setBounds(15, 10, 90, 30);
 		itemNameLbl.setForeground(new Color(192, 192, 192));
-		JTextField itemNameTxtField = new JTextField();
 		itemNameTxtField.setFont(bodyFont);
 		itemNameTxtField.setBounds(16, 40, 465, 40);
 		itemNameTxtField.setForeground(new Color(192, 192, 192));
@@ -74,12 +114,11 @@ public class EditItemPage extends JFrame {
 		itemNameTxtField.setBorder(new EmptyBorder(10, 10, 10, 10));
 		itemNameTxtField.setCaretColor(Color.white);
 		itemNameTxtField.setText(item.getItemName());
-		
-		JLabel usernameLbl = new JLabel("Username");
+		itemNameTxtField.addKeyListener(keyListener);
+
 		usernameLbl.setFont(bodyFont);
 		usernameLbl.setBounds(15, 90, 90, 30);
 		usernameLbl.setForeground(new Color(192, 192, 192));
-		JTextField usernameTxtField = new JTextField();
 		usernameTxtField.setFont(bodyFont);
 		usernameTxtField.setBounds(16, 120, 465, 40);
 		usernameTxtField.setForeground(new Color(192, 192, 192));
@@ -87,8 +126,8 @@ public class EditItemPage extends JFrame {
 		usernameTxtField.setBorder(new EmptyBorder(10, 10, 10, 10));
 		usernameTxtField.setCaretColor(Color.white);
 		usernameTxtField.setText(item.getUsername());
-		
-		JLabel passwordLbl = new JLabel("Password");
+		usernameTxtField.addKeyListener(keyListener);
+
 		passwordLbl.setFont(bodyFont);
 		passwordLbl.setBounds(15, 170, 90, 30);
 		passwordLbl.setForeground(new Color(192, 192, 192));
@@ -99,23 +138,19 @@ public class EditItemPage extends JFrame {
 		passwordTxtField.setBorder(new EmptyBorder(10, 10, 10, 10));
 		passwordTxtField.setCaretColor(Color.white);
 		passwordTxtField.setText(item.getPassword());
-		ImageIcon visibilityOnIcon = new ImageIcon(new ImageIcon("src/resources/visibility_on.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-		ImageIcon visibilityOffIcon = new ImageIcon(new ImageIcon("src/resources/visibility_off.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-		JLabel togglePasswordVisibilityIcon = new JLabel(visibilityOnIcon);
+		passwordTxtField.addKeyListener(keyListener);
+
 		togglePasswordVisibilityIcon.setOpaque(true);
 		togglePasswordVisibilityIcon.setBounds(375, 200, 50, 40);
 		togglePasswordVisibilityIcon.setBackground(new Color(56, 56, 56));
-		ImageIcon generateIcon = new ImageIcon(new ImageIcon("src/resources/generate.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-		JLabel generatePasswordDialogBtn = new JLabel(generateIcon);
+
 		generatePasswordDialogBtn.setOpaque(true);
 		generatePasswordDialogBtn.setBounds(430, 200, 50, 40);
 		generatePasswordDialogBtn.setBackground(new Color(56, 56, 56));
 		
-		JLabel urlLbl = new JLabel("URL");
 		urlLbl.setFont(bodyFont);
 		urlLbl.setBounds(15, 250, 90, 30);
 		urlLbl.setForeground(new Color(192, 192, 192));
-		JTextField urlTxtField = new JTextField();
 		urlTxtField.setFont(bodyFont);
 		urlTxtField.setBounds(16, 280, 465, 40);
 		urlTxtField.setForeground(new Color(192, 192, 192));
@@ -123,7 +158,7 @@ public class EditItemPage extends JFrame {
 		urlTxtField.setBorder(new EmptyBorder(10, 10, 10, 10));
 		urlTxtField.setCaretColor(Color.white);
 		urlTxtField.setText(item.getURL());
-		
+		urlTxtField.addKeyListener(keyListener);
 		
 		panel1.setLayout(null);
 		panel1.setBackground(new Color(40, 40, 40));
@@ -139,12 +174,10 @@ public class EditItemPage extends JFrame {
 		panel1.add(urlLbl);
 		panel1.add(urlTxtField);
 		
-		JLabel notesHeading = new JLabel("NOTES");
 		notesHeading.setFont(headingFont);
 		notesHeading.setForeground(new Color(192, 192, 192));
 		notesHeading.setBounds(110, 445, 100, 50);
 		
-		JTextArea notesTxtArea = new JTextArea();
 		notesTxtArea.setFont(bodyFont);
 		notesTxtArea.setBackground(new Color(40, 40, 40));
 		notesTxtArea.setForeground(Color.white);
@@ -155,14 +188,12 @@ public class EditItemPage extends JFrame {
 		notesTxtArea.setCaretColor(Color.white);
 		notesTxtArea.setText(item.getNotes());
 		
-		JScrollPane notesTxtAreaPane = new JScrollPane(notesTxtArea);
 //		notesTxtAreaPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		notesTxtAreaPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		notesTxtAreaPane.setPreferredSize(new Dimension(500, 100));
 		notesTxtAreaPane.setBorder(new LineBorder(Color.RED, 0));
 		notesTxtAreaPane.setBounds(100, 495, 500, 300);
-		
-		JButton saveBtn = new JButton("Save");
+
 		saveBtn.setBounds(100, 845, 100, 40);
 		saveBtn.setFont(bodyFont);
 		saveBtn.setBackground(null);
@@ -180,7 +211,6 @@ public class EditItemPage extends JFrame {
 		mainPanel.setBackground(new Color(26, 26, 26));
 		mainPanel.setPreferredSize(new Dimension(720, 950));
 		
-		JScrollPane panel1Scroll = new JScrollPane(mainPanel);
 		panel1Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		panel1Scroll.setBounds(-1, 0, 720, 600);
 		panel1Scroll.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
@@ -262,28 +292,39 @@ public class EditItemPage extends JFrame {
 			}
 		});
 		
+		saveBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (itemNameTxtField.getText().isEmpty() || itemNameTxtField.getText().trim().isEmpty()) {
+					showEditItemErrorDialog();
+				} else {
+					saveBtn.setBackground(new Color (50, 50, 50));
+					
+					String itemNameValue = itemNameTxtField.getText();
+					String usernameValue = usernameTxtField.getText();
+					char[] passwordChar = passwordTxtField.getPassword();
+					String passwordValue = new String(passwordChar);
+					String urlValue = urlTxtField.getText();
+					String notesValue = notesTxtArea.getText();
+					
+					item.setItemName(itemNameValue);
+					item.setUsername(usernameValue);
+					item.setPassword(passwordValue);
+					item.setURL(urlValue);
+					item.setNotes(notesValue);
+					
+					((LoggedInPage) loggedInPageJFrame).updateRightPanelGUI(item);
+					loggedInPageJFrame.setEnabled(true);
+					((LoggedInPage) loggedInPageJFrame).updateLeftPanelGUI();
+					EditItemPage.this.dispose();
+				}
+			}
+		});
+		
 		saveBtn.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				saveBtn.setBackground(new Color (50, 50, 50));
 				
-				String itemNameValue = itemNameTxtField.getText();
-            	String usernameValue = usernameTxtField.getText();
-            	char[] passwordChar = passwordTxtField.getPassword();
-                String passwordValue = new String(passwordChar);
-                String urlValue = urlTxtField.getText();
-                String notesValue = notesTxtArea.getText();
-                
-                item.setItemName(itemNameValue);
-                item.setUsername(usernameValue);
-                item.setPassword(passwordValue);
-                item.setURL(urlValue);
-                item.setNotes(notesValue);
-                
-                ((LoggedInPage) loggedInPageJFrame).updateRightPanelGUI(item);
-                loggedInPageJFrame.setEnabled(true);
-                ((LoggedInPage) loggedInPageJFrame).updateLeftPanelGUI();
-                dispose();
 			}
 
 			@Override
@@ -419,5 +460,41 @@ public class EditItemPage extends JFrame {
 				generatePasswordDialogBtn.setBackground(new Color (40, 40, 40));
 			}
 		});
+	}
+	
+	private void showEditItemErrorDialog() {		
+		JFrame frame = new JFrame();
+		
+		ImageIcon warningIcon = new ImageIcon(new ImageIcon("src/resources/warning.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		
+		frame.setIconImage(icon);
+		frame.setTitle("Error");
+		frame.setLocation(660, 550);
+		frame.setSize(285, 80);
+		frame.setUndecorated(true);
+		frame.setVisible(true);
+		frame.getContentPane().setBackground(new Color(186, 0, 12));
+		frame.setLayout(null);
+		
+		JLabel iconLbl = new JLabel();
+		iconLbl.setIcon(warningIcon);
+		iconLbl.setBounds(25, 25, 30, 30);
+		
+		JLabel infoMessageLbl = new JLabel("Please enter an item name.");
+		infoMessageLbl.setFont(bodyFont);
+		infoMessageLbl.setBounds(65, 23, 200, 30);
+		infoMessageLbl.setForeground(new Color(228, 228, 228));
+		
+		frame.add(iconLbl);
+		frame.add(infoMessageLbl);
+		
+		Timer timer = new Timer(2000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		
+		timer.setRepeats(false);
+		timer.start();
 	}
 }
