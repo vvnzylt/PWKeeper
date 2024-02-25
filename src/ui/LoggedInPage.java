@@ -235,6 +235,42 @@ public class LoggedInPage extends JFrame {
 		searchAndSortLeftPanel();
 	}
 	
+	private void showDeletedItemSuccessDialog() {
+		JFrame frame = new JFrame();
+		
+		ImageIcon successIcon = new ImageIcon(new ImageIcon("src/resources/check.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		
+		frame.setIconImage(appIcon);
+		frame.setTitle("Success");
+		frame.setLocation(692, 630);
+		frame.setSize(250, 80);
+		frame.setUndecorated(true);
+		frame.setVisible(true);
+		frame.getContentPane().setBackground(new Color(53, 122, 56));
+		frame.setLayout(null);
+		
+		JLabel iconLbl = new JLabel();
+		iconLbl.setIcon(successIcon);
+		iconLbl.setBounds(25, 25, 30, 30);
+		
+		JLabel infoMessageLbl = new JLabel("Item has been deleted.");
+		infoMessageLbl.setFont(bodyFont);
+		infoMessageLbl.setBounds(65, 23, 200, 30);
+		infoMessageLbl.setForeground(new Color(228, 228, 228));
+		
+		frame.add(iconLbl);
+		frame.add(infoMessageLbl);
+		
+		Timer timer = new Timer(2000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		
+		timer.setRepeats(false);
+		timer.start();
+	}
+	
 	private void showLogoutDialog() {
 		LoggedInPage.this.setEnabled(false);
 		
@@ -453,6 +489,7 @@ public class LoggedInPage extends JFrame {
 		JTextArea notesValue = new JTextArea();
 		JScrollPane notesValuePane = new JScrollPane(notesValue);
 		JButton editItemBtn = new JButton("Edit");
+		JButton deleteItemBtn = new JButton("Delete");
 		
 		MouseListener buttonMouseListener = new MouseListener() {
 			@Override
@@ -645,6 +682,13 @@ public class LoggedInPage extends JFrame {
 		editItemBtn.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
 		editItemBtn.setFocusPainted(false);
 		
+		deleteItemBtn.setBounds(220, 865, 100, 40);
+		deleteItemBtn.setFont(bodyFont);
+		deleteItemBtn.setBackground(null);
+		deleteItemBtn.setForeground(new Color(192, 192, 192));
+		deleteItemBtn.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
+		deleteItemBtn.setFocusPainted(false);
+		
 		primaryInfoPanel.add(itemNameLbl);
 		primaryInfoPanel.add(itemNameValue);
 		primaryInfoPanel.add(copyItemNameIconBtn);
@@ -665,6 +709,7 @@ public class LoggedInPage extends JFrame {
 		rightPanel.add(notesLbl);
 		rightPanel.add(notesValuePane);
 		rightPanel.add(editItemBtn);
+		rightPanel.add(deleteItemBtn);
 		
 		rightPanel.revalidate();
 		rightPanel.repaint();
@@ -701,15 +746,55 @@ public class LoggedInPage extends JFrame {
 				editItemBtn.setBackground(null);
 			}
 		});
+		
+		deleteItemBtn.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AccountDB.getAccount().get(AccountDB.getLoggedInAccountIndex()).removeItem(item);
+				showDeletedItemSuccessDialog();
+				updateLeftPanelGUI();
+				resetRightPanel();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				deleteItemBtn.setBackground(new Color (60, 60, 60));
+				deleteItemBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				deleteItemBtn.setBackground(null);
+			}
+		});
 	}
 	
 	public void updateLeftPanelGUI() {
 		updateLeftPanel(itemList);
 	}
 	
+	private void resetRightPanel() {
+		rightPanel.removeAll();
+		rightPanel.revalidate();
+		rightPanel.repaint();
+	}
+	
 	public void updateRightPanelGUI(ItemDetails item) {
 		updateRightPanel(item);
 	}
+	
 	
 	public void resetView() {
 		rightPanelScrollPane.getViewport().setViewPosition(new Point(0,0));

@@ -44,6 +44,10 @@ public class AccountDB {
 		item.add(new ItemDetails(itemNameValue, usernameValue, passwordValue, urlValue, notesValue));
 	}
 	
+	public void removeItem(ItemDetails accountItem) {
+		item.remove(accountItem);
+	}
+	
 	public void getListOfAccountDetails() {
 		for (int i = 0; i < item.size(); i++) {
 			System.out.println("Account #" + (i+1));
