@@ -20,6 +20,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.util.ArrayList;
@@ -249,7 +250,6 @@ public class LoggedInPage extends JFrame {
 		logoutFrame.setLocation(700, 330);
 		logoutFrame.setSize(270, 150);
 		logoutFrame.setVisible(true);
-		logoutFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		logoutFrame.getContentPane().setBackground(new Color(26, 26, 26));
 		logoutFrame.setLayout(null);
 		
@@ -283,6 +283,13 @@ public class LoggedInPage extends JFrame {
 		logoutFrame.add(yesBtn);
 		logoutFrame.add(noBtn);
 		
+		logoutFrame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				LoggedInPage.this.setEnabled(true);
+				}
+			});
+		
 		yesBtn.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -290,7 +297,8 @@ public class LoggedInPage extends JFrame {
 				AccountAuth.setAccountLoggedInStatus(false);
 	        	LaunchPage launchPage = new LaunchPage();
 	        	launchPage.setVisible(true);
-	            dispose();
+	        	logoutFrame.dispose();
+	        	dispose();
 			}
 
 			@Override
