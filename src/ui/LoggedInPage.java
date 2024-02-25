@@ -248,7 +248,7 @@ public class LoggedInPage extends JFrame {
 		logoutFrame.setIconImage(appIcon);
 		logoutFrame.setTitle("Logout");
 		logoutFrame.setLocation(700, 330);
-		logoutFrame.setSize(270, 150);
+		logoutFrame.setSize(270, 160);
 		logoutFrame.setVisible(true);
 		logoutFrame.getContentPane().setBackground(new Color(26, 26, 26));
 		logoutFrame.setLayout(null);

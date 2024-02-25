@@ -5,6 +5,8 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -14,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 public class AccountAuth {
 	private static boolean isAccountLoggedIn;
@@ -28,11 +31,10 @@ public class AccountAuth {
 				showDialog("EMPTY_FIELD");
 				break;
 			} else if (AccountDB.getAccount().get(i).getUsername().equals(usernameValue) && AccountDB.getAccount().get(i).getPassword().equals(passwordValue)) {
-//				showDialog("SUCCESSFUL_LOGIN");
 				AccountDB.setLoggedInAccountIndex(i);
 				isAccountLoggedIn = true;
-	            System.out.println("LaunchPage.java: Account logged-in with username \"" + usernameValue + "\"");
-	            JOptionPane.showMessageDialog(loginBtn, "You are now logged in!", "Success", JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("LaunchPage.java: Account logged-in with username \"" + usernameValue + "\"");
+				showDialog("SUCCESSFUL_LOGIN");
 				break;
 			}
 			if (i == (AccountDB.getAccount().size()-1)) {
@@ -119,97 +121,76 @@ public class AccountAuth {
 	}
 	
 	private static void showDialog(String value) {
-		JFrame frame = new JFrame();
 		String imagePath = null;
 		String infoMessage = null;
+		JFrame frame = new JFrame();
+		JLabel iconLbl = new JLabel();
 		
 		if (value.contains("EMPTY_FIELD")) {
 			imagePath = "src/resources/warning.png";
 			infoMessage = "<html>Can't login. One of the text fields  cannot be empty.</html>";
 			frame.setTitle("Error");
+			frame.setSize(325, 90);
+			frame.setLocation(637, 630);
+			frame.getContentPane().setBackground(new Color(186, 0, 12));
 		} else if (value.contains("WRONG_CREDENTIALS")) {
 			imagePath = "src/resources/warning.png";
 			infoMessage = "<html>Wrong credentials. Please try again.</html>";
 			frame.setTitle("Error");
+			frame.setSize(300, 90);
+			frame.setLocation(625, 630);
+			frame.getContentPane().setBackground(new Color(186, 0, 12));
 		}
 		else if (value.contains("USERNAME_ALREADY_EXIST")) {
 			imagePath = "src/resources/warning.png";
 			infoMessage = "<html>Username already exist. Please use another username.</html>";
 			frame.setTitle("Error");
+			frame.setSize(325, 90);
+			frame.setLocation(637, 630);
+			frame.getContentPane().setBackground(new Color(186, 0, 12));
 		} else if (value.contains("SUCCESSFUL_LOGIN")) {
 			imagePath = "src/resources/check.png";
 			infoMessage = "<html>You are now logged in!</html>";
 			frame.setTitle("Success");
+			frame.setSize(250, 90);
+			frame.setLocation(675, 630);
+			frame.getContentPane().setBackground(new Color(53, 122, 56));
 		} else if (value.contains("SUCCESSFULLY_REGISTERED")) {
 			imagePath = "src/resources/check.png";
 			infoMessage = "<html>Account registered.</html>";
 			frame.setTitle("Success");
+			frame.setSize(250, 90);
+			frame.setLocation(675, 630);
+			frame.getContentPane().setBackground(new Color(53, 122, 56));
 		} 
-				
-		ImageIcon frameIcon = new ImageIcon(imagePath);
-		
-		Image img = frameIcon.getImage();
-		Image scaledImg = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-		frameIcon = new ImageIcon(scaledImg);
-		
-		frame.setIconImage(appIcon);
-		frame.setLocation(700, 330);
-		frame.setSize(330, 170);
-		frame.setVisible(true);
-		frame.getContentPane().setBackground(new Color(26, 26, 26));
-		frame.setLayout(null);
-		frame.setResizable(false);
-		
-		JLabel iconLbl = new JLabel();
-		iconLbl.setIcon(frameIcon);
-		iconLbl.setBounds(25, 30, 30, 30);
 		
 		JLabel infoLbl = new JLabel(infoMessage);
+		
+		ImageIcon frameIcon = new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		
+		frame.setIconImage(appIcon);
+		frame.setUndecorated(true);
+		frame.setVisible(true);
+		frame.setLayout(null);
+		frame.setResizable(false);
+
+		iconLbl.setIcon(frameIcon);
+		iconLbl.setBounds(25, 30, 30, 30);
 		
 		infoLbl.setFont(bodyFont);
 		infoLbl.setBounds(65, 20, 250, 50);
 		infoLbl.setForeground(new Color(228, 228, 228));
 		
-		JButton okBtn = new JButton("OK");
-		okBtn.setFont(bodyFont);
-		okBtn.setBounds(125, 85, 60, 30);
-		okBtn.setBackground(new Color (40, 40, 40));
-		okBtn.setForeground(new Color(192, 192, 192));
-		okBtn.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
-		okBtn.setFocusPainted(false);
-		
 		frame.add(iconLbl);
 		frame.add(infoLbl);
-		frame.add(okBtn);
 		
-		okBtn.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		Timer timer = new Timer(2000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				okBtn.setBackground(new Color (60, 60, 60));
-				okBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				okBtn.setBackground(new Color (40, 40, 40));
-			}
 		});
+		
+		timer.setRepeats(false);
+		timer.start();
 	}
 }
