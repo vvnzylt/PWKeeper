@@ -364,17 +364,21 @@ public class LoggedInPage extends JFrame {
             itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             itemPanel.setPreferredSize(new Dimension(324, 70));
             itemPanel.setMaximumSize(new Dimension(324, 70));
+            itemPanel.setBackground(new Color(226, 226, 226));
             
             ImageIcon icon = new ImageIcon(getClass().getResource("/resources/logo_without_text.png"));
-            Image scaledIcon = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            Image scaledIcon = icon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
             icon = new ImageIcon(scaledIcon);
             
             JLabel iconLabel = new JLabel(icon);
-            iconLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            iconLabel.setBackground(null);
+            iconLabel.setPreferredSize(new Dimension(70, 70));
             itemPanel.add(iconLabel, BorderLayout.WEST);
             
             JPanel textPanel = new JPanel();
             textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+            textPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            textPanel.setBackground(null);
             
             JLabel nameLabel = new JLabel(item.getItemName());
             nameLabel.setFont(headingFont);
