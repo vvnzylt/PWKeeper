@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,6 +11,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.TextField;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -34,6 +37,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -412,60 +416,182 @@ public class LoggedInPage extends JFrame {
 		rightPanel.removeAll();
 		
 		JLabel addItemHeading = new JLabel("ITEM INFORMATION");
+		
+		JPanel primaryInfoPanel = new JPanel();
+		JLabel itemNameLbl = new JLabel("Item name");
+		JLabel itemNameValue = new JLabel(item.getItemName());
+		ImageIcon copyIcon = new ImageIcon(new ImageIcon("src/resources/copy.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		ImageIcon greenCheckIcon = new ImageIcon(new ImageIcon("src/resources/green_check.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		JLabel copyItemNameIconBtn = new JLabel(copyIcon);
+		JLabel usernameLbl = new JLabel("Username");
+		JLabel usernameValue = new JLabel(item.getUsername());
+		JLabel copyUsernameIconBtn = new JLabel(copyIcon);
+		JLabel passwordLbl = new JLabel("Password");
+		JLabel passwordValue = new JLabel(item.getPassword());
+		JLabel copyPasswordIconBtn = new JLabel(copyIcon);
+		
+		JPanel websitePanel = new JPanel();
+		JLabel websiteLbl = new JLabel("Website");
+		JLabel websiteValue = new JLabel(item.getURL());
+		JLabel copyWebsiteIconBtn = new JLabel(copyIcon);
+		JLabel notesLbl = new JLabel("NOTES");
+		JTextArea notesValue = new JTextArea();
+		JScrollPane notesValuePane = new JScrollPane(notesValue);
+		JButton editItemBtn = new JButton("Edit");
+		
+		MouseListener buttonMouseListener = new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String copiedValue;
+				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+				
+				if (e.getSource() == copyItemNameIconBtn) {
+					copiedValue = item.getItemName();
+					StringSelection stringSelection = new StringSelection(copiedValue);
+					clipboard.setContents(stringSelection, null);
+					copyItemNameIconBtn.setIcon(greenCheckIcon);
+					
+					Timer timer = new Timer(2000, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							copyItemNameIconBtn.setIcon(copyIcon);
+						}
+					});
+					
+					timer.setRepeats(false);
+					timer.start();
+				} 
+				else if (e.getSource() == copyUsernameIconBtn) {
+					copiedValue = item.getUsername();
+					StringSelection stringSelection = new StringSelection(copiedValue);
+					clipboard.setContents(stringSelection, null);
+					
+					copyUsernameIconBtn.setIcon(greenCheckIcon);
+					
+					Timer timer = new Timer(2000, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							copyUsernameIconBtn.setIcon(copyIcon);
+						}
+					});
+					
+					timer.setRepeats(false);
+					timer.start();
+				} 
+				else if (e.getSource() == copyPasswordIconBtn) {
+					copiedValue = item.getPassword();
+					StringSelection stringSelection = new StringSelection(copiedValue);
+					clipboard.setContents(stringSelection, null);
+					
+					copyPasswordIconBtn.setIcon(greenCheckIcon);
+					
+					Timer timer = new Timer(2000, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							copyPasswordIconBtn.setIcon(copyIcon);
+						}
+					});
+					
+					timer.setRepeats(false);
+					timer.start();
+				} 
+				else if (e.getSource() == copyWebsiteIconBtn) {
+					copiedValue = item.getURL();
+					StringSelection stringSelection = new StringSelection(copiedValue);
+					clipboard.setContents(stringSelection, null);
+					
+					copyWebsiteIconBtn.setIcon(greenCheckIcon);
+					
+					Timer timer = new Timer(2000, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							copyWebsiteIconBtn.setIcon(copyIcon);
+						}
+					});
+					
+					timer.setRepeats(false);
+					timer.start();
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				((Component) e.getSource()).setCursor(new Cursor(Cursor.HAND_CURSOR));
+				((Component) e.getSource()).setBackground(new Color(56, 56, 56));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				((Component) e.getSource()).setBackground(new Color(40, 40, 40));
+			}
+		};
+		
 		addItemHeading.setFont(headingFont);
 		addItemHeading.setForeground(new Color(192, 192, 192));
 		addItemHeading.setBounds(110, 30, 178, 50);
 		
-		JPanel primaryInfoPanel = new JPanel();
 		primaryInfoPanel.setBounds(100, 80, 550, 225);
 		primaryInfoPanel.setLayout(null);
 		primaryInfoPanel.setBackground(new Color(40, 40, 40));
-		
-		JLabel itemNameLbl = new JLabel("Item name");
+
 		itemNameLbl.setFont(bodyFont);
 		itemNameLbl.setBounds(15, 10, 90, 30);
 		itemNameLbl.setForeground(new Color(192, 192, 192));
-		JLabel itemNameValue = new JLabel(item.getItemName());
+
 		itemNameValue.setFont(bodyFont);
 		itemNameValue.setBounds(15, 40, 465, 20);
 		itemNameValue.setForeground(new Color(255, 255, 255));
-		JLabel usernameLbl = new JLabel("Username");
+		copyItemNameIconBtn.setOpaque(true);
+		copyItemNameIconBtn.setBounds(485, 20, 50, 50);
+		copyItemNameIconBtn.setBackground(new Color(40, 40, 40));
+		copyItemNameIconBtn.addMouseListener(buttonMouseListener);
 		usernameLbl.setFont(bodyFont);
 		usernameLbl.setBounds(15, 80, 90, 30);
 		usernameLbl.setForeground(new Color(192, 192, 192));
-		JLabel usernameValue = new JLabel(item.getUsername());
 		usernameValue.setFont(bodyFont);
 		usernameValue.setBounds(15, 110, 465, 20);
 		usernameValue.setForeground(new Color(255, 255, 255));
-		JLabel passwordLbl = new JLabel("Password");
+		copyUsernameIconBtn.setOpaque(true);
+		copyUsernameIconBtn.setBounds(485, 90, 50, 50);
+		copyUsernameIconBtn.setBackground(new Color(40, 40, 40));
+		copyUsernameIconBtn.addMouseListener(buttonMouseListener);
 		passwordLbl.setFont(bodyFont);
 		passwordLbl.setBounds(15, 150, 90, 30);
 		passwordLbl.setForeground(new Color(192, 192, 192));
-		JLabel passwordValue = new JLabel(item.getPassword());
 		passwordValue.setFont(bodyFont);
 		passwordValue.setBounds(15, 180, 465, 20);
 		passwordValue.setForeground(new Color(255, 255, 255));
-		
-		JPanel websitePanel = new JPanel();
+		copyPasswordIconBtn.setOpaque(true);
+		copyPasswordIconBtn.setBounds(485, 160, 50, 50);
+		copyPasswordIconBtn.setBackground(new Color(40, 40, 40));
+		copyPasswordIconBtn.addMouseListener(buttonMouseListener);
 		websitePanel.setBounds(100, 350, 550, 80);
 		websitePanel.setLayout(null);
 		websitePanel.setBackground(new Color(40, 40, 40));
 		
-		JLabel websiteLbl = new JLabel("Website");
 		websiteLbl.setFont(bodyFont);
 		websiteLbl.setBounds(15, 10, 90, 30);
 		websiteLbl.setForeground(new Color(192, 192, 192));
-		JLabel websiteValue = new JLabel(item.getURL());
 		websiteValue.setFont(bodyFont);
 		websiteValue.setBounds(15, 40, 465, 20);
 		websiteValue.setForeground(new Color(255, 255, 255));
-		
-		JLabel notesLbl = new JLabel("NOTES");
+		copyWebsiteIconBtn.setOpaque(true);
+		copyWebsiteIconBtn.setBounds(485, 15, 50, 50);
+		copyWebsiteIconBtn.setBackground(new Color(40, 40, 40));
+		copyWebsiteIconBtn.addMouseListener(buttonMouseListener);
+
 		notesLbl.setFont(headingFont);
 		notesLbl.setBounds(110, 475, 64, 30);
 		notesLbl.setForeground(new Color(192, 192, 192));
-		
-		JTextArea notesValue = new JTextArea();
+
 		notesValue.setText(item.getNotes());
 		notesValue.setFont(bodyFont);
 		notesValue.setBackground(new Color(40, 40, 40));
@@ -476,13 +602,11 @@ public class LoggedInPage extends JFrame {
 		notesValue.setEditable(false);
 		notesValue.setBorder(new EmptyBorder(15, 15, 15, 15));
 		
-		JScrollPane notesValuePane = new JScrollPane(notesValue);
 		notesValuePane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		notesValuePane.setBounds(100, 515, 550, 300);
 		notesValuePane.setPreferredSize(new Dimension(500, 300));
 		notesValuePane.setBorder(new LineBorder(Color.RED, 0));
 		
-		JButton editItemBtn = new JButton("Edit");
 		editItemBtn.setBounds(100, 865, 100, 40);
 		editItemBtn.setFont(bodyFont);
 		editItemBtn.setBackground(null);
@@ -492,12 +616,16 @@ public class LoggedInPage extends JFrame {
 		
 		primaryInfoPanel.add(itemNameLbl);
 		primaryInfoPanel.add(itemNameValue);
+		primaryInfoPanel.add(copyItemNameIconBtn);
 		primaryInfoPanel.add(usernameLbl);
 		primaryInfoPanel.add(usernameValue);
+		primaryInfoPanel.add(copyUsernameIconBtn);
 		primaryInfoPanel.add(passwordLbl);
 		primaryInfoPanel.add(passwordValue);
+		primaryInfoPanel.add(copyPasswordIconBtn);
 		websitePanel.add(websiteLbl);
 		websitePanel.add(websiteValue);
+		websitePanel.add(copyWebsiteIconBtn);
 		
 		rightPanel.add(addItemHeading);
 		rightPanel.add(primaryInfoPanel);
