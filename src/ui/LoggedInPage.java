@@ -123,7 +123,7 @@ public class LoggedInPage extends JFrame {
 		smallerLeftPanel.setBackground(new Color(40, 40, 40));
 		smallerLeftPanel.setBounds(0, 605, 324, 80);
 		smallerLeftPanel.setLayout(null);
-		JButton addBtn = new JButton("Add account");
+		JButton addBtn = new JButton("Add item");
 //		UIManager.put("Button.select", new Color(50, 50, 50));
 //      UIManager.put("Button.darcula.hoverColor", new Color(50, 50, 50));
 		addBtn.setBounds(45, 20, 240, 40);

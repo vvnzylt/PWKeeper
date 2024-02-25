@@ -37,8 +37,8 @@ public class LaunchPage extends JFrame {
 		Font headingFont = new Font("Helvetica", Font.BOLD, 20);
 		Font bodyFont = new Font("Helvetica", Font.PLAIN, 16);
 		Image icon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
-		ImageIcon visibility_on = new ImageIcon("src/resources/visibility_on.png");
-		ImageIcon visibility_off = new ImageIcon("src/resources/visibility_off.png");
+		ImageIcon visibilityOnIcon = new ImageIcon(new ImageIcon("src/resources/visibility_on.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		ImageIcon visibilityOffIcon = new ImageIcon(new ImageIcon("src/resources/visibility_off.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		ImageIcon appNameLogo = new ImageIcon("src/resources/logo_landscape_252x90.png");
 		JLabel appNameLogoJL = new JLabel();
 		appNameLogoJL.setIcon(appNameLogo);
@@ -73,7 +73,7 @@ public class LaunchPage extends JFrame {
 		JPanel userCredentials = new JPanel();
 		JTextField username = new JTextField("Enter your username");
 		JPasswordField password = new JPasswordField("Enter your password");
-		JLabel showOrHideBtn = new JLabel(visibility_off);
+		JLabel showOrHideBtn = new JLabel(visibilityOffIcon);
 		JButton loginBtn = new JButton("Login");
 		JButton registerBtn = new JButton("Register");
 		JButton registeredAccBtn = new JButton("Show registered accounts");		
@@ -89,8 +89,7 @@ public class LaunchPage extends JFrame {
 		password.setEchoChar((char)0);
 		showOrHideBtn.setOpaque(true);
 		showOrHideBtn.setBounds(200, 50, 50, 40);
-		showOrHideBtn.setBackground(new Color(192, 192, 192));
-		showOrHideBtn.setForeground(new Color(56, 56, 56));
+		showOrHideBtn.setBackground(new Color(56, 56, 56));
 //		showOrHideBtn.setHorizontalAlignment(SwingConstants.CENTER);
 //		showOrHideBtn.setVerticalAlignment(SwingConstants.CENTER);
 		loginBtn.setFont(bodyFont);
@@ -163,7 +162,7 @@ public class LaunchPage extends JFrame {
 				if (password.getText().equals("Enter your password")) {
 					password.setText(null);
 					password.setEchoChar('•');
-					showOrHideBtn.setIcon(visibility_on);
+					showOrHideBtn.setIcon(visibilityOnIcon);
 				}
 			}
 
@@ -195,11 +194,11 @@ public class LaunchPage extends JFrame {
 		showOrHideBtn.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (showOrHideBtn.getIcon() == visibility_on) {
-					showOrHideBtn.setIcon(visibility_off);
+				if (showOrHideBtn.getIcon() == visibilityOnIcon) {
+					showOrHideBtn.setIcon(visibilityOffIcon);
 					password.setEchoChar((char)0);
 				} else {
-					showOrHideBtn.setIcon(visibility_on);
+					showOrHideBtn.setIcon(visibilityOnIcon);
 					password.setEchoChar('•');
 				}
 				
@@ -221,12 +220,12 @@ public class LaunchPage extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				showOrHideBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				showOrHideBtn.setBackground(new Color(156, 156, 156));
+				showOrHideBtn.setBackground(new Color(68, 68, 68));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				showOrHideBtn.setBackground(new Color(192, 192, 192));
+				showOrHideBtn.setBackground(new Color(56, 56, 56));
 			}
 		});
 		

@@ -95,25 +95,25 @@ public class AddItemPage extends JFrame {
 		passwordLbl.setBounds(15, 170, 90, 30);
 		passwordLbl.setForeground(new Color(192, 192, 192));
 		passwordTxtField.setFont(bodyFont);
-		passwordTxtField.setBounds(16, 200, 365, 40);
+		passwordTxtField.setBounds(16, 200, 355, 40);
 		passwordTxtField.setForeground(new Color(192, 192, 192));
 		passwordTxtField.setBackground(new Color(96, 96, 96));
 		passwordTxtField.setBorder(new EmptyBorder(10, 10, 10, 10));
 		passwordTxtField.setCaretColor(Color.white);
-		ImageIcon visibilityOnIcon = new ImageIcon("src/resources/visibility_on.png");
-		ImageIcon visibilityOffIcon = new ImageIcon("src/resources/visibility_off.png");
+		ImageIcon visibilityOnIcon = new ImageIcon(new ImageIcon("src/resources/visibility_on.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		ImageIcon visibilityOffIcon = new ImageIcon(new ImageIcon("src/resources/visibility_off.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		JLabel togglePasswordVisibilityIcon = new JLabel(visibilityOnIcon);
 		togglePasswordVisibilityIcon.setOpaque(true);
-		togglePasswordVisibilityIcon.setBounds(380, 200, 50, 40);
-		togglePasswordVisibilityIcon.setBackground(new Color(192, 192, 192));
-		togglePasswordVisibilityIcon.setForeground(new Color(56, 56, 56));
-		togglePasswordVisibilityIcon.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, new Color(128, 128, 128)));
-		ImageIcon generateIcon = new ImageIcon("src/resources/generate.png");
+		togglePasswordVisibilityIcon.setBounds(375, 200, 50, 40);
+		togglePasswordVisibilityIcon.setBackground(new Color(56, 56, 56));
+//		togglePasswordVisibilityIcon.setForeground(new Color(56, 56, 56));
+//		togglePasswordVisibilityIcon.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, new Color(40, 40, 40)));
+		ImageIcon generateIcon = new ImageIcon(new ImageIcon("src/resources/generate.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		JLabel generatePasswordDialogBtn = new JLabel(generateIcon);
 		generatePasswordDialogBtn.setOpaque(true);
 		generatePasswordDialogBtn.setBounds(430, 200, 50, 40);
-		generatePasswordDialogBtn.setBackground(new Color(192, 192, 192));
-		generatePasswordDialogBtn.setForeground(new Color(56, 56, 56));
+		generatePasswordDialogBtn.setBackground(new Color(56, 56, 56));
+//		generatePasswordDialogBtn.setForeground(new Color(56, 56, 56));
 		
 		JLabel urlLbl = new JLabel("URL");
 		urlLbl.setFont(bodyFont);
@@ -224,12 +224,12 @@ public class AddItemPage extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				togglePasswordVisibilityIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				togglePasswordVisibilityIcon.setBackground(new Color(156, 156, 156));
+				togglePasswordVisibilityIcon.setBackground(new Color(68, 68, 68));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				togglePasswordVisibilityIcon.setBackground(new Color(192, 192, 192));
+				togglePasswordVisibilityIcon.setBackground(new Color(56, 56, 56));
 			}
 		});
 		
@@ -255,12 +255,12 @@ public class AddItemPage extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				generatePasswordDialogBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				generatePasswordDialogBtn.setBackground(new Color(156, 156, 156));
+				generatePasswordDialogBtn.setBackground(new Color(68, 68, 68));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				generatePasswordDialogBtn.setBackground(new Color(192, 192, 192));
+				generatePasswordDialogBtn.setBackground(new Color(56, 56, 56));
 			}
 		});
 		
