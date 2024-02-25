@@ -126,7 +126,7 @@ public class LoggedInPage extends JFrame {
 		smallerLeftPanel.setLayout(null);
 		JButton addBtn = new JButton("Add item");
 //		UIManager.put("Button.select", new Color(50, 50, 50));
-//      UIManager.put("Button.darcula.hoverColor", new Color(50, 50, 50));
+//		UIManager.put("Button.darcula.hoverColor", new Color(50, 50, 50));
 		addBtn.setBounds(45, 20, 240, 40);
 		addBtn.setFont(bodyFont);
 		addBtn.setBackground(new Color (40, 40, 40));
@@ -142,28 +142,28 @@ public class LoggedInPage extends JFrame {
 		getContentPane().add(rightPanelScrollPane);
 		
 		searchField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-            	searchAndSortLeftPanel();
-            }
-            
-            public void removeUpdate(DocumentEvent e) {
-            	searchAndSortLeftPanel();
-            }
-            
-            public void changedUpdate(DocumentEvent e) {
-            	searchAndSortLeftPanel();
-            }
-        });
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				searchAndSortLeftPanel();
+			}
+			
+			public void removeUpdate(DocumentEvent e) {
+				searchAndSortLeftPanel();
+			}
+			
+			public void changedUpdate(DocumentEvent e) {
+				searchAndSortLeftPanel();
+			}
+		});
 		
 		addBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	JFrame loggedinPageJFrame = getjFrame();
-                AddItemPage addItemPage = new AddItemPage(loggedinPageJFrame);
-                addItemPage.setVisible(true);
-            }
-        });
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame loggedinPageJFrame = getjFrame();
+				AddItemPage addItemPage = new AddItemPage(loggedinPageJFrame);
+				addItemPage.setVisible(true);
+			}
+		});
 		
 		addBtn.addMouseListener(new MouseListener() {
 			@Override
@@ -196,11 +196,11 @@ public class LoggedInPage extends JFrame {
 		});
 		
 		logoutBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	showLogoutDialog();
-            }
-        });
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showLogoutDialog();
+			}
+		});
 		
 		logoutBtn.addMouseListener(new MouseListener() {
 			@Override
@@ -395,51 +395,51 @@ public class LoggedInPage extends JFrame {
 	
 	private void updateLeftPanel(ArrayList<ItemDetails> items) {
 		leftPanel.removeAll(); // Clear existing components
-        for (ItemDetails item : items) {
-        	JPanel itemPanel = new JPanel(new BorderLayout());
-            itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            itemPanel.setPreferredSize(new Dimension(324, 70));
-            itemPanel.setMaximumSize(new Dimension(324, 70));
-            itemPanel.setBackground(new Color(226, 226, 226));
-            
-            ImageIcon icon = new ImageIcon(getClass().getResource("/resources/logo_without_text.png"));
-            Image scaledIcon = icon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-            icon = new ImageIcon(scaledIcon);
-            
-            JLabel iconLabel = new JLabel(icon);
-            iconLabel.setBackground(null);
-            iconLabel.setPreferredSize(new Dimension(70, 70));
-            itemPanel.add(iconLabel, BorderLayout.WEST);
-            
-            JPanel textPanel = new JPanel();
-            textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
-            textPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-            textPanel.setBackground(null);
-            
-            JLabel nameLabel = new JLabel(item.getItemName());
-            nameLabel.setFont(headingFont);
-            textPanel.add(nameLabel);
-
-            JLabel usernameLabel = new JLabel(item.getUsername());
-            usernameLabel.setFont(bodyFont);
-            textPanel.add(usernameLabel);
-            
-            itemPanel.add(textPanel, BorderLayout.CENTER);
-            
-            leftPanel.add(itemPanel);
-            
-            itemPanel.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    // Display details of the clicked item on rightPanel
-                	updateRightPanel(item);
-                	resetView();
-                }
-            });
-        }
+		for (ItemDetails item : items) {
+			JPanel itemPanel = new JPanel(new BorderLayout());
+			itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			itemPanel.setPreferredSize(new Dimension(324, 70));
+			itemPanel.setMaximumSize(new Dimension(324, 70));
+			itemPanel.setBackground(new Color(226, 226, 226));
+			
+			ImageIcon icon = new ImageIcon(getClass().getResource("/resources/logo_without_text.png"));
+			Image scaledIcon = icon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+			icon = new ImageIcon(scaledIcon);
+			
+			JLabel iconLabel = new JLabel(icon);
+			iconLabel.setBackground(null);
+			iconLabel.setPreferredSize(new Dimension(70, 70));
+			itemPanel.add(iconLabel, BorderLayout.WEST);
+			
+			JPanel textPanel = new JPanel();
+			textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+			textPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+			textPanel.setBackground(null);
+			
+			JLabel nameLabel = new JLabel(item.getItemName());
+			nameLabel.setFont(headingFont);
+			textPanel.add(nameLabel);
+			
+			JLabel usernameLabel = new JLabel(item.getUsername());
+			usernameLabel.setFont(bodyFont);
+			textPanel.add(usernameLabel);
+			
+			itemPanel.add(textPanel, BorderLayout.CENTER);
+			
+			leftPanel.add(itemPanel);
+			
+			itemPanel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// Display details of the clicked item on rightPanel
+					updateRightPanel(item);
+					resetView();
+				}
+			});
+		}
         
-        leftPanel.revalidate();
-        leftPanel.repaint();
+		leftPanel.revalidate();
+		leftPanel.repaint();
 	}
 	
 	private void searchAndSortLeftPanel() {
@@ -447,9 +447,9 @@ public class LoggedInPage extends JFrame {
 		ArrayList<ItemDetails> filteredItems = new ArrayList<>();
 		
 		if (query.isEmpty()) {
-	        updateLeftPanel(itemList);
-	        return;
-	    }
+			updateLeftPanel(itemList);
+			return;
+        }
 		
 		for (ItemDetails item : itemList) {
 			if (item.getUsername().toLowerCase().contains(query) || item.getItemName().toLowerCase().contains(query) || item.getNotes().toLowerCase().contains(query)) {
@@ -521,8 +521,7 @@ public class LoggedInPage extends JFrame {
 					
 					timer.setRepeats(false);
 					timer.start();
-				}
-				else if (e.getSource() == copyUsernameIconBtn) {
+				} else if (e.getSource() == copyUsernameIconBtn) {
 					copiedValue = item.getUsername();
 					StringSelection stringSelection = new StringSelection(copiedValue);
 					clipboard.setContents(stringSelection, null);
@@ -537,8 +536,7 @@ public class LoggedInPage extends JFrame {
 					
 					timer.setRepeats(false);
 					timer.start();
-				} 
-				else if (e.getSource() == copyPasswordIconBtn) {
+				} else if (e.getSource() == copyPasswordIconBtn) {
 					copiedValue = item.getPassword();
 					StringSelection stringSelection = new StringSelection(copiedValue);
 					clipboard.setContents(stringSelection, null);
@@ -553,8 +551,7 @@ public class LoggedInPage extends JFrame {
 					
 					timer.setRepeats(false);
 					timer.start();
-				} 
-				else if (e.getSource() == copyWebsiteIconBtn) {
+				} else if (e.getSource() == copyWebsiteIconBtn) {
 					copiedValue = item.getURL();
 					StringSelection stringSelection = new StringSelection(copiedValue);
 					clipboard.setContents(stringSelection, null);
@@ -717,10 +714,10 @@ public class LoggedInPage extends JFrame {
 		editItemBtn.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JFrame loggedinPageJFrame = getjFrame();
-				editItemBtn.setBackground(new Color (50, 50, 50));
-                EditItemPage editItemPage = new EditItemPage(loggedinPageJFrame, item);
-                editItemPage.setVisible(true);
+			JFrame loggedinPageJFrame = getjFrame();
+			editItemBtn.setBackground(new Color (50, 50, 50));
+			EditItemPage editItemPage = new EditItemPage(loggedinPageJFrame, item);
+			editItemPage.setVisible(true);
 			}
 
 			@Override
@@ -795,8 +792,7 @@ public class LoggedInPage extends JFrame {
 		updateRightPanel(item);
 	}
 	
-	
-	public void resetView() {
+	private void resetView() {
 		rightPanelScrollPane.getViewport().setViewPosition(new Point(0,0));
 	}
 	

@@ -93,8 +93,8 @@ public class AccountAuth {
 				showDialog("EMPTY_FIELD");
 			} else {
 				AccountDB.getAccount().add(new AccountDB(usernameValue, passwordValue));
-	            System.out.println("AccountAuth.java: Account registered with username \"" + usernameValue + "\"");
-	            showDialog("SUCCESSFULLY_REGISTERED");
+				System.out.println("AccountAuth.java: Account registered with username \"" + usernameValue + "\"");
+				showDialog("SUCCESSFULLY_REGISTERED");
 			}
 		}
 	}
@@ -140,8 +140,7 @@ public class AccountAuth {
 			frame.setSize(300, 90);
 			frame.setLocation(625, 630);
 			frame.getContentPane().setBackground(new Color(186, 0, 12));
-		}
-		else if (value.contains("USERNAME_ALREADY_EXIST")) {
+		} else if (value.contains("USERNAME_ALREADY_EXIST")) {
 			imagePath = "src/resources/warning.png";
 			infoMessage = "<html>Username already exist. Please use another username.</html>";
 			frame.setTitle("Error");

@@ -216,11 +216,11 @@ public class AddItemPage extends JFrame {
 		getContentPane().add(panel1Scroll);
 		
 		addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-            	loggedInPageJFrame.setEnabled(true);
-            }
-        });
+			@Override
+			public void windowClosing(WindowEvent e) {
+				loggedInPageJFrame.setEnabled(true);
+			}
+		});
 		
 		togglePasswordVisibilityIcon.addMouseListener(new MouseListener() {
 			@Override
@@ -291,28 +291,29 @@ public class AddItemPage extends JFrame {
 		});
 		
 		saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	if (itemNameTxtField.getText().isEmpty() || itemNameTxtField.getText().trim().isEmpty()) {
-            		showAddItemErrorDialog();
-            	} else {
-            		showAddedItemSuccessDialog();
-            		
-            		String itemNameValue = itemNameTxtField.getText();
-                	String usernameValue = usernameTxtField.getText();
-                	char[] passwordChar = passwordTxtField.getPassword();
-                	String passwordValue = new String(passwordChar);
-                	String urlValue = urlTxtField.getText();
-                	String notesValue = notesTxtArea.getText();
-                    
-                	AccountDB.getAccount().get(AccountDB.getLoggedInAccountIndex()).addAccountDetails(itemNameValue, usernameValue, passwordValue, urlValue, notesValue);
-                	System.out.println("AddItemPage.java: Item added");
-                	loggedInPageJFrame.setEnabled(true);
-                	((LoggedInPage) loggedInPageJFrame).updateLeftPanelGUI();
-                	dispose();
-            	}
-            }
-        });
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (itemNameTxtField.getText().isEmpty() || itemNameTxtField.getText().trim().isEmpty()) {
+					showAddItemErrorDialog();
+				} 
+				else {
+					showAddedItemSuccessDialog();
+					
+					String itemNameValue = itemNameTxtField.getText();
+					String usernameValue = usernameTxtField.getText();
+					char[] passwordChar = passwordTxtField.getPassword();
+					String passwordValue = new String(passwordChar);
+					String urlValue = urlTxtField.getText();
+					String notesValue = notesTxtArea.getText();
+					
+					AccountDB.getAccount().get(AccountDB.getLoggedInAccountIndex()).addAccountDetails(itemNameValue, usernameValue, passwordValue, urlValue, notesValue);
+					System.out.println("AddItemPage.java: Item added");
+					loggedInPageJFrame.setEnabled(true);
+					((LoggedInPage) loggedInPageJFrame).updateLeftPanelGUI();
+					dispose();
+				}
+			}
+		});
 		
 		saveBtn.addMouseListener(new MouseListener() {
 			@Override
@@ -406,11 +407,11 @@ public class AddItemPage extends JFrame {
 		frame.add(generatePasswordDialogBtn);
 		
 		frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-            	AddItemPage.this.setEnabled(true);
-            }
-        });
+			@Override
+			public void windowClosing(WindowEvent e) {
+				AddItemPage.this.setEnabled(true);
+		    }
+		});
 		
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {

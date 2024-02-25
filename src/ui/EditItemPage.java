@@ -218,11 +218,11 @@ public class EditItemPage extends JFrame {
 		getContentPane().add(panel1Scroll);
 		
 		addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-            	loggedInPageJFrame.setEnabled(true);
-            }
-        });
+			@Override
+			public void windowClosing(WindowEvent e) {
+				loggedInPageJFrame.setEnabled(true);
+			}
+		});
 		
 		togglePasswordVisibilityIcon.addMouseListener(new MouseListener() {
 			@Override

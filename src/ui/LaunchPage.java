@@ -231,26 +231,26 @@ public class LaunchPage extends JFrame {
 		});
 		
 		loginBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String usernameValue = username.getText();
-                String passwordValue = password.getText();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String usernameValue = username.getText();
+				String passwordValue = password.getText();
+				
+				AccountAuth.loginAccount(usernameValue, passwordValue, loginBtn);
                 
-                AccountAuth.loginAccount(usernameValue, passwordValue, loginBtn);
-                
-                if (AccountAuth.isAccountLoggedIn() == true) {
-                	Timer timer = new Timer(1000, new ActionListener() {
-            			public void actionPerformed(ActionEvent e) {
-            				LoggedInPage loggedInPage = new LoggedInPage();
-                        	loggedInPage.setVisible(true);
-                        	dispose(); // Closes the LaunchPage window permanently
-            			}
-            		});
-                	timer.setRepeats(false);
-            		timer.start();
-                }
-            }
-        });
+				if (AccountAuth.isAccountLoggedIn() == true) {
+					Timer timer = new Timer(1000, new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							LoggedInPage loggedInPage = new LoggedInPage();
+							loggedInPage.setVisible(true);
+							dispose(); // Closes the LaunchPage window permanently
+						}
+					});
+					timer.setRepeats(false);
+					timer.start();
+				}
+			}
+		});
 		
 		loginBtn.addMouseListener(new MouseListener() {
 			@Override
@@ -282,14 +282,14 @@ public class LaunchPage extends JFrame {
 		});
 		
 		registerBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String usernameValue = username.getText();
-                String passwordValue = password.getText();
-                
-                AccountAuth.registerAccount(usernameValue, passwordValue, registerBtn);
-            }
-        });
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String usernameValue = username.getText();
+				String passwordValue = password.getText();
+				
+				AccountAuth.registerAccount(usernameValue, passwordValue, registerBtn);
+			}
+		});
 		
 		registerBtn.addMouseListener(new MouseListener() {
 			@Override
@@ -322,11 +322,11 @@ public class LaunchPage extends JFrame {
 		});
 		
 		registeredAccBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	AccountAuth.showRegisteredAccounts();
-            }
-        });
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AccountAuth.showRegisteredAccounts();
+			}
+		});
 		
 		registeredAccBtn.addMouseListener(new MouseListener() {
 			@Override
