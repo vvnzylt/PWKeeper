@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
@@ -238,9 +239,15 @@ public class LaunchPage extends JFrame {
                 AccountAuth.loginAccount(usernameValue, passwordValue, loginBtn);
                 
                 if (AccountAuth.isAccountLoggedIn() == true) {
-                	LoggedInPage loggedInPage = new LoggedInPage();
-                	loggedInPage.setVisible(true);
-                	dispose(); // Closes the LaunchPage window permanently
+                	Timer timer = new Timer(1000, new ActionListener() {
+            			public void actionPerformed(ActionEvent e) {
+            				LoggedInPage loggedInPage = new LoggedInPage();
+                        	loggedInPage.setVisible(true);
+                        	dispose(); // Closes the LaunchPage window permanently
+            			}
+            		});
+                	timer.setRepeats(false);
+            		timer.start();
                 }
             }
         });
