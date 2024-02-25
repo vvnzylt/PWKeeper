@@ -427,7 +427,10 @@ public class LoggedInPage extends JFrame {
 		JLabel usernameValue = new JLabel(item.getUsername());
 		JLabel copyUsernameIconBtn = new JLabel(copyIcon);
 		JLabel passwordLbl = new JLabel("Password");
-		JLabel passwordValue = new JLabel(item.getPassword());
+		JPasswordField passwordValue = new JPasswordField(item.getPassword());
+		ImageIcon visibilityOnIcon = new ImageIcon(new ImageIcon("src/resources/visibility_on.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		ImageIcon visibilityOffIcon = new ImageIcon(new ImageIcon("src/resources/visibility_off.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		JLabel togglePasswordVisibilityIconBtn = new JLabel(visibilityOnIcon);
 		JLabel copyPasswordIconBtn = new JLabel(copyIcon);
 		
 		JPanel websitePanel = new JPanel();
@@ -445,6 +448,16 @@ public class LoggedInPage extends JFrame {
 				String copiedValue;
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 				
+				if (e.getSource() == togglePasswordVisibilityIconBtn) {
+					if (passwordValue.getEchoChar() == 0) {
+						passwordValue.setEchoChar('•');
+						togglePasswordVisibilityIconBtn.setIcon(visibilityOnIcon);
+					} else {
+						passwordValue.setEchoChar((char)0);
+						togglePasswordVisibilityIconBtn.setIcon(visibilityOffIcon);
+					}
+				}
+				
 				if (e.getSource() == copyItemNameIconBtn) {
 					copiedValue = item.getItemName();
 					StringSelection stringSelection = new StringSelection(copiedValue);
@@ -459,7 +472,7 @@ public class LoggedInPage extends JFrame {
 					
 					timer.setRepeats(false);
 					timer.start();
-				} 
+				}
 				else if (e.getSource() == copyUsernameIconBtn) {
 					copiedValue = item.getUsername();
 					StringSelection stringSelection = new StringSelection(copiedValue);
@@ -566,9 +579,15 @@ public class LoggedInPage extends JFrame {
 		passwordLbl.setFont(bodyFont);
 		passwordLbl.setBounds(15, 150, 90, 30);
 		passwordLbl.setForeground(new Color(192, 192, 192));
+		passwordValue.setBackground(null);
+		passwordValue.setBorder(null);
 		passwordValue.setFont(bodyFont);
-		passwordValue.setBounds(15, 180, 465, 20);
+		passwordValue.setBounds(15, 180, 400, 20);
 		passwordValue.setForeground(new Color(255, 255, 255));
+		togglePasswordVisibilityIconBtn.setOpaque(true);
+		togglePasswordVisibilityIconBtn.setBounds(430, 160, 50, 50);
+		togglePasswordVisibilityIconBtn.setBackground(new Color(40, 40, 40));
+		togglePasswordVisibilityIconBtn.addMouseListener(buttonMouseListener);
 		copyPasswordIconBtn.setOpaque(true);
 		copyPasswordIconBtn.setBounds(485, 160, 50, 50);
 		copyPasswordIconBtn.setBackground(new Color(40, 40, 40));
@@ -622,6 +641,7 @@ public class LoggedInPage extends JFrame {
 		primaryInfoPanel.add(copyUsernameIconBtn);
 		primaryInfoPanel.add(passwordLbl);
 		primaryInfoPanel.add(passwordValue);
+		primaryInfoPanel.add(togglePasswordVisibilityIconBtn);
 		primaryInfoPanel.add(copyPasswordIconBtn);
 		websitePanel.add(websiteLbl);
 		websitePanel.add(websiteValue);
