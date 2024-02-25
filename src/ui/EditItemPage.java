@@ -298,6 +298,7 @@ public class EditItemPage extends JFrame {
 				if (itemNameTxtField.getText().isEmpty() || itemNameTxtField.getText().trim().isEmpty()) {
 					showEditItemErrorDialog();
 				} else {
+					showEditedItemSuccessDialog();
 					saveBtn.setBackground(new Color (50, 50, 50));
 					
 					String itemNameValue = itemNameTxtField.getText();
@@ -481,6 +482,42 @@ public class EditItemPage extends JFrame {
 		iconLbl.setBounds(25, 25, 30, 30);
 		
 		JLabel infoMessageLbl = new JLabel("Please enter an item name.");
+		infoMessageLbl.setFont(bodyFont);
+		infoMessageLbl.setBounds(65, 23, 200, 30);
+		infoMessageLbl.setForeground(new Color(228, 228, 228));
+		
+		frame.add(iconLbl);
+		frame.add(infoMessageLbl);
+		
+		Timer timer = new Timer(2000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		
+		timer.setRepeats(false);
+		timer.start();
+	}
+	
+	private void showEditedItemSuccessDialog() {
+		JFrame frame = new JFrame();
+		
+		ImageIcon successIcon = new ImageIcon(new ImageIcon("src/resources/check.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		
+		frame.setIconImage(icon);
+		frame.setTitle("Success");
+		frame.setLocation(692, 630);
+		frame.setSize(250, 80);
+		frame.setUndecorated(true);
+		frame.setVisible(true);
+		frame.getContentPane().setBackground(new Color(53, 122, 56));
+		frame.setLayout(null);
+		
+		JLabel iconLbl = new JLabel();
+		iconLbl.setIcon(successIcon);
+		iconLbl.setBounds(25, 25, 30, 30);
+		
+		JLabel infoMessageLbl = new JLabel("Item has been edited.");
 		infoMessageLbl.setFont(bodyFont);
 		infoMessageLbl.setBounds(65, 23, 200, 30);
 		infoMessageLbl.setForeground(new Color(228, 228, 228));
