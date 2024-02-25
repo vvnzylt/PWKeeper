@@ -36,10 +36,10 @@ public class LaunchPage extends JFrame {
 		// Setting necessary UI-related components
 		Font headingFont = new Font("Helvetica", Font.BOLD, 20);
 		Font bodyFont = new Font("Helvetica", Font.PLAIN, 16);
-		Image icon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
-		ImageIcon visibility_on = new ImageIcon("src/resources/visibility_on.png");
-		ImageIcon visibility_off = new ImageIcon("src/resources/visibility_off.png");
-		ImageIcon appNameLogo = new ImageIcon("src/resources/logo_landscape_252x90.png");
+		Image icon = Toolkit.getDefaultToolkit().getImage("src/assets/logo_without_text.png");
+		ImageIcon visibility_on = new ImageIcon("src/assets/visibility_on.png");
+		ImageIcon visibility_off = new ImageIcon("src/assets/visibility_off.png");
+		ImageIcon appNameLogo = new ImageIcon("src/assets/logo_landscape_252x90.png");
 		JLabel appNameLogoJL = new JLabel();
 		appNameLogoJL.setIcon(appNameLogo);
 		

@@ -19,7 +19,7 @@ public class AccountAuth {
 	private static boolean isAccountLoggedIn;
 	private Font headingFont = new Font("Helvetica", Font.BOLD, 18);
 	private static Font bodyFont = new Font("Helvetica", Font.PLAIN, 16); 
-	private static Image appIcon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
+	private static Image appIcon = Toolkit.getDefaultToolkit().getImage("src/assets/logo_without_text.png");
 	
 	public static void loginAccount(String usernameValue, String passwordValue, JButton loginBtn) {
 		for (int i = 0; i < AccountDB.getAccount().size(); i++) {
@@ -124,24 +124,24 @@ public class AccountAuth {
 		String infoMessage = null;
 		
 		if (value.contains("EMPTY_FIELD")) {
-			imagePath = "src/resources/warning.png";
+			imagePath = "src/assets/warning.png";
 			infoMessage = "<html>Can't login. One of the text fields  cannot be empty.</html>";
 			frame.setTitle("Error");
 		} else if (value.contains("WRONG_CREDENTIALS")) {
-			imagePath = "src/resources/warning.png";
+			imagePath = "src/assets/warning.png";
 			infoMessage = "<html>Wrong credentials. Please try again.</html>";
 			frame.setTitle("Error");
 		}
 		else if (value.contains("USERNAME_ALREADY_EXIST")) {
-			imagePath = "src/resources/warning.png";
+			imagePath = "src/assets/warning.png";
 			infoMessage = "<html>Username already exist. Please use another username.</html>";
 			frame.setTitle("Error");
 		} else if (value.contains("SUCCESSFUL_LOGIN")) {
-			imagePath = "src/resources/check.png";
+			imagePath = "src/assets/check.png";
 			infoMessage = "<html>You are now logged in!</html>";
 			frame.setTitle("Success");
 		} else if (value.contains("SUCCESSFULLY_REGISTERED")) {
-			imagePath = "src/resources/check.png";
+			imagePath = "src/assets/check.png";
 			infoMessage = "<html>Account registered.</html>";
 			frame.setTitle("Success");
 		} 

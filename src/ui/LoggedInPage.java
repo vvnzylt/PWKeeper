@@ -52,7 +52,7 @@ public class LoggedInPage extends JFrame {
 	private ArrayList<ItemDetails> itemList = AccountDB.getAccount().get(AccountDB.getLoggedInAccountIndex()).getAccountListObj();
 	private Font headingFont = new Font("Helvetica", Font.BOLD, 18);
 	private Font bodyFont = new Font("Helvetica", Font.PLAIN, 16); 
-	private Image appIcon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
+	private Image appIcon = Toolkit.getDefaultToolkit().getImage("src/assets/logo_without_text.png");
 	
 	public LoggedInPage() {
 		initializeUI();
@@ -234,7 +234,7 @@ public class LoggedInPage extends JFrame {
 		LoggedInPage.this.setEnabled(false);
 		
 		JFrame logoutFrame = new JFrame();
-		ImageIcon questionMarkIcon = new ImageIcon("src/resources/question_mark.png");
+		ImageIcon questionMarkIcon = new ImageIcon("src/assets/question_mark.png");
 		
 		Image img = questionMarkIcon.getImage();
 		Image scaledImg = img.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
