@@ -35,7 +35,7 @@ import backend.AccountDB;
 import backend.PasswordGenerator;
 
 public class AddItemPage extends JFrame {
-	private Image icon = Toolkit.getDefaultToolkit().getImage("src/assets/logo_without_text.png");
+	private Image icon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
 	private Font headingFont = new Font("Helvetica", Font.BOLD, 18);
 	private Font bodyFont = new Font("Helvetica", Font.PLAIN, 16);
 	private	JPasswordField passwordTxtField = new JPasswordField();
@@ -100,15 +100,15 @@ public class AddItemPage extends JFrame {
 		passwordTxtField.setBackground(new Color(96, 96, 96));
 		passwordTxtField.setBorder(new EmptyBorder(10, 10, 10, 10));
 		passwordTxtField.setCaretColor(Color.white);
-		ImageIcon visibilityOnIcon = new ImageIcon("src/assets/visibility_on.png");
-		ImageIcon visibilityOffIcon = new ImageIcon("src/assets/visibility_off.png");
+		ImageIcon visibilityOnIcon = new ImageIcon("src/resources/visibility_on.png");
+		ImageIcon visibilityOffIcon = new ImageIcon("src/resources/visibility_off.png");
 		JLabel togglePasswordVisibilityIcon = new JLabel(visibilityOnIcon);
 		togglePasswordVisibilityIcon.setOpaque(true);
 		togglePasswordVisibilityIcon.setBounds(380, 200, 50, 40);
 		togglePasswordVisibilityIcon.setBackground(new Color(192, 192, 192));
 		togglePasswordVisibilityIcon.setForeground(new Color(56, 56, 56));
 		togglePasswordVisibilityIcon.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, new Color(128, 128, 128)));
-		ImageIcon generateIcon = new ImageIcon("src/assets/generate.png");
+		ImageIcon generateIcon = new ImageIcon("src/resources/generate.png");
 		JLabel generatePasswordDialogBtn = new JLabel(generateIcon);
 		generatePasswordDialogBtn.setOpaque(true);
 		generatePasswordDialogBtn.setBounds(430, 200, 50, 40);
