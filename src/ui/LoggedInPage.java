@@ -21,6 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -294,6 +296,7 @@ public class LoggedInPage extends JFrame {
 		logoutFrame.setVisible(true);
 		logoutFrame.getContentPane().setBackground(new Color(26, 26, 26));
 		logoutFrame.setLayout(null);
+		logoutFrame.requestFocusInWindow();
 		
 		JLabel iconLbl = new JLabel();
 		iconLbl.setIcon(questionMarkIcon);
@@ -332,15 +335,31 @@ public class LoggedInPage extends JFrame {
 				}
 			});
 		
-		yesBtn.addMouseListener(new MouseListener() {
+		logoutFrame.addKeyListener(new KeyAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					yesBtn.doClick();
+				}
+			}
+		});
+		
+		yesBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				yesBtn.setBackground(new Color (60, 60, 60));
 				AccountAuth.setAccountLoggedInStatus(false);
 	        	LaunchPage launchPage = new LaunchPage();
 	        	launchPage.setVisible(true);
 	        	logoutFrame.dispose();
 	        	dispose();
+			}
+		});
+		
+		yesBtn.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
 			}
 
 			@Override
