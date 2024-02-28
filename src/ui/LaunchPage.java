@@ -35,14 +35,15 @@ public class LaunchPage extends JFrame {
 		System.out.println("LaunchPage.java: Homepage UI initialized.");
 		
 		// Setting necessary UI-related components
-		Font headingFont = new Font("Helvetica", Font.BOLD, 20);
+		Font headingFont = new Font("Helvetica", Font.BOLD, 18);
 		Font bodyFont = new Font("Helvetica", Font.PLAIN, 16);
 		Image icon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
 		ImageIcon visibilityOnIcon = new ImageIcon(new ImageIcon("src/resources/visibility_on.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		ImageIcon visibilityOffIcon = new ImageIcon(new ImageIcon("src/resources/visibility_off.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-		ImageIcon appNameLogo = new ImageIcon(new ImageIcon("src/resources/logo_landscape.png").getImage().getScaledInstance(252, 90, Image.SCALE_SMOOTH));
-		JLabel appNameLogoJL = new JLabel();
-		appNameLogoJL.setIcon(appNameLogo);
+		ImageIcon appLogo = new ImageIcon(new ImageIcon("src/resources/logo_landscape_white_text.png").getImage().getScaledInstance(215, 50, Image.SCALE_SMOOTH));
+		ImageIcon randomDesignImg = new ImageIcon(new ImageIcon("src/resources/poly_grid-haikei.png").getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
+		JLabel appLogoLbl = new JLabel();
+		appLogoLbl.setIcon(appLogo);
 		
 		// Setting JFrame properties
 		setSize(1080, 720);
@@ -55,90 +56,86 @@ public class LaunchPage extends JFrame {
 		getContentPane().setBackground(new Color(26, 26, 26));
 		
 		UIManager.put("Button.select", new Color(50, 50, 50));
-//		UIManager.put("Button.darcula.hoverColor", new Color(50, 50, 50));
-//		UIManager.put("Button.mouseHoverColor", new Color(100, 50, 50));
 		
 		// Customization of JFrame components
-		JPanel appName = new JPanel();
-		appName.setBounds(420, 50, 250, 100);
-		appName.add(appNameLogoJL);
+		JPanel leftPanel = new JPanel();
+		JLabel randomDesignImgLbl = new JLabel();
+		randomDesignImgLbl.setIcon(randomDesignImg);
+		randomDesignImgLbl.setBackground(null);
+		leftPanel.setOpaque(false);
+		leftPanel.setBounds(200, 135, 260, 405);
+		leftPanel.add(randomDesignImgLbl);
 		
-		JPanel loginHeading = new JPanel();
-		JLabel loginLbl = new JLabel("<html><body style='text-align: center'>Login or register <br>your account</html>");
-		loginLbl.setFont(headingFont);
-		loginLbl.setForeground(Color.white);
-		loginHeading.setBounds(420, 160, 250, 65);
-		loginHeading.setBackground(new Color(26, 26, 26));
-		loginHeading.add(loginLbl);
+		JPanel appNamePanel = new JPanel();
+		appNamePanel.setBounds(420, 50, 250, 100);
+		appNamePanel.add(appLogoLbl);
 		
-		JPanel userCredentials = new JPanel();
-		JTextField username = new JTextField("Enter your username");
-		JPasswordField password = new JPasswordField("Enter your password");
+		JPanel rightPanel = new JPanel();
+		appLogoLbl.setBounds(95, 60, 215, 50);
+		JLabel loginRegisterLbl = new JLabel("Login/Register");
+		loginRegisterLbl.setFont(headingFont);
+		loginRegisterLbl.setForeground(new Color(226, 226, 226));
+		loginRegisterLbl.setBounds(145, 125, 180, 30);
+
+		rightPanel.setLayout(null);
+		rightPanel.setBounds(460, 140, 400, 400);
+		rightPanel.setBackground(new Color(36, 36, 36));
+		
+		JTextField usernameField = new JTextField("Enter your username");
+		JPasswordField passwordField = new JPasswordField("Enter your password");
 		JLabel showOrHideBtn = new JLabel(visibilityOffIcon);
 		JButton loginBtn = new JButton("Login");
 		JButton registerBtn = new JButton("Register");
-		JButton registeredAccBtn = new JButton("Show registered accounts");		
-		userCredentials.setBounds(420, 270, 250, 300);
-		userCredentials.setLayout(null);
-		userCredentials.setBackground(new Color(26, 26, 26));
-		username.setFont(bodyFont);
-		username.setBounds(0, 0, 250, 40);
-		username.setBorder(new EmptyBorder(10, 10, 10, 10));
-		username.setForeground(Color.gray);
-		password.setFont(bodyFont);
-		password.setBounds(0, 50, 200, 40);
-		password.setBorder(new EmptyBorder(10, 10, 10, 10));
-		password.setEchoChar((char)0);
-		password.setForeground(Color.gray);
+		usernameField.setFont(bodyFont);
+		usernameField.setBounds(80, 200, 250, 40);
+		usernameField.setBorder(new EmptyBorder(10, 10, 10, 10));
+		usernameField.setForeground(Color.gray);
+		passwordField.setFont(bodyFont);
+		passwordField.setBounds(80, 250, 200, 40);
+		passwordField.setBorder(new EmptyBorder(10, 10, 10, 10));
+		passwordField.setEchoChar((char)0);
+		passwordField.setForeground(Color.gray);
 		showOrHideBtn.setOpaque(true);
-		showOrHideBtn.setBounds(200, 50, 50, 40);
+		showOrHideBtn.setBounds(280, 250, 50, 40);
 		showOrHideBtn.setBackground(new Color(56, 56, 56));
-//		showOrHideBtn.setHorizontalAlignment(SwingConstants.CENTER);
-//		showOrHideBtn.setVerticalAlignment(SwingConstants.CENTER);
 		loginBtn.setFont(bodyFont);
-		loginBtn.setBounds(0, 100, 120, 40);
+		loginBtn.setBounds(80, 300, 120, 40);
 		loginBtn.setBackground(new Color(56, 58, 61));
 		loginBtn.setForeground(new Color(226, 226, 226));
 		loginBtn.setBorder(BorderFactory.createLineBorder(Color.red, 0));
 		loginBtn.setFocusPainted(false);
 		registerBtn.setFont(bodyFont);
-		registerBtn.setBounds(130, 100, 120, 40);
+		registerBtn.setBounds(210, 300, 120, 40);
 		registerBtn.setBackground(new Color(56, 58, 61));
 		registerBtn.setForeground(new Color(226, 226, 226));
 		registerBtn.setBorder(BorderFactory.createLineBorder(Color.red, 0));
 		registerBtn.setFocusPainted(false);
-		registeredAccBtn.setFont(bodyFont);
-		registeredAccBtn.setBounds(0, 150, 250, 40);
-		registeredAccBtn.setBackground(new Color(56, 58, 61));
-		registeredAccBtn.setForeground(new Color(226, 226, 226));
-		registeredAccBtn.setBorder(BorderFactory.createLineBorder(Color.red, 0));
-		registeredAccBtn.setFocusPainted(false);
 		
-		userCredentials.add(username);
-		userCredentials.add(password);
-		userCredentials.add(showOrHideBtn);
-		userCredentials.add(loginBtn);
-		userCredentials.add(registerBtn);
-		userCredentials.add(registeredAccBtn);
+		rightPanel.add(loginRegisterLbl);
+		rightPanel.add(appLogoLbl);
+		rightPanel.add(usernameField);
+		rightPanel.add(passwordField);
+		rightPanel.add(showOrHideBtn);
+		rightPanel.add(loginBtn);
+		rightPanel.add(registerBtn);
 		
-		add(appName);
-		add(loginHeading);
-		add(userCredentials);
+		add(leftPanel);
+		add(rightPanel);
 		
 		// MouseListener for clearing text fields when user clicks on those fields
-		username.addMouseListener(new MouseListener() {
+		usernameField.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (username.getText().equals("Enter your username")) {
-					username.setText(null);
-					username.setForeground(Color.black);
+				if (usernameField.getText().equals("Enter your username")) {
+					usernameField.setText(null);
+					usernameField.setForeground(Color.black);
 				}
 				
-				if (password.getText().isEmpty()) {
-					password.setForeground(Color.GRAY);
-					password.setEchoChar((char)0);
+				if (passwordField.getText().isEmpty()) {
+					passwordField.setForeground(Color.GRAY);
+					passwordField.setEchoChar((char)0);
 					showOrHideBtn.setIcon(visibilityOffIcon);
-					password.setText("Enter your password");
+					passwordField.setText("Enter your password");
 				}
 			}
 
@@ -167,19 +164,19 @@ public class LaunchPage extends JFrame {
 			}
 		});
 		
-		password.addMouseListener(new MouseListener() {
+		passwordField.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (password.getText().equals("Enter your password")) {
-					password.setText(null);
-					password.setEchoChar('•');
+				if (passwordField.getText().equals("Enter your password")) {
+					passwordField.setText(null);
+					passwordField.setEchoChar('•');
 					showOrHideBtn.setIcon(visibilityOnIcon);
-					password.setForeground(Color.BLACK);
+					passwordField.setForeground(Color.BLACK);
 				}
 				
-				if (username.getText().isEmpty()) {
-					username.setForeground(Color.GRAY);
-					username.setText("Enter your username");
+				if (usernameField.getText().isEmpty()) {
+					usernameField.setForeground(Color.GRAY);
+					usernameField.setText("Enter your username");
 				}
 			}
 
@@ -213,10 +210,10 @@ public class LaunchPage extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (showOrHideBtn.getIcon() == visibilityOnIcon) {
 					showOrHideBtn.setIcon(visibilityOffIcon);
-					password.setEchoChar((char)0);
+					passwordField.setEchoChar((char)0);
 				} else {
 					showOrHideBtn.setIcon(visibilityOnIcon);
-					password.setEchoChar('•');
+					passwordField.setEchoChar('•');
 				}
 				
 			}
@@ -249,8 +246,8 @@ public class LaunchPage extends JFrame {
 		loginBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String usernameValue = username.getText();
-				String passwordValue = password.getText();
+				String usernameValue = usernameField.getText();
+				String passwordValue = passwordField.getText();
 				
 				AccountAuth.loginAccount(usernameValue, passwordValue, loginBtn);
                 
@@ -300,8 +297,8 @@ public class LaunchPage extends JFrame {
 		registerBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String usernameValue = username.getText();
-				String passwordValue = password.getText();
+				String usernameValue = usernameField.getText();
+				String passwordValue = passwordField.getText();
 				
 				AccountAuth.registerAccount(usernameValue, passwordValue, registerBtn);
 			}
@@ -334,43 +331,6 @@ public class LaunchPage extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				registerBtn.setBackground(new Color (56, 58, 61));
-			}
-		});
-		
-		registeredAccBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				AccountAuth.showRegisteredAccounts();
-			}
-		});
-		
-		registeredAccBtn.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				registeredAccBtn.setBackground(new Color (50, 50, 50));
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				registeredAccBtn.setBackground(new Color (50, 50, 50));
-				registeredAccBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				registeredAccBtn.setBackground(new Color (56, 58, 61));
 			}
 		});
 	}

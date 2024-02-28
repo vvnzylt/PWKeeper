@@ -99,23 +99,6 @@ public class AccountAuth {
 		}
 	}
 	
-	public static void showRegisteredAccounts() {
-		System.out.println("Total registered accounts: " + AccountDB.getAccount().size());
-		
-		if (AccountDB.getAccount().size() == 0) {
-			System.out.println("There are no registered accounts.");
-		} else {
-			System.out.println("Here are the list of registered accounts");
-			
-			for (int i = 0; i < AccountDB.getAccount().size(); i++) {
-				System.out.println("Account #" + (i+1));
-				System.out.println("Username: " + AccountDB.getAccount().get(i).getUsername());
-				System.out.println("Password: " + AccountDB.getAccount().get(i).getPassword());
-			}
-		}
-		System.out.println();
-	}
-	
 	public static void getListOfAccountDetails() {
 		AccountDB.getAccount().get(AccountDB.getLoggedInAccountIndex()).getListOfAccountDetails();
 	}
