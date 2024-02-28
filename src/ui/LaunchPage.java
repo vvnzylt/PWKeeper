@@ -40,7 +40,7 @@ public class LaunchPage extends JFrame {
 		Image icon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
 		ImageIcon visibilityOnIcon = new ImageIcon(new ImageIcon("src/resources/visibility_on.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		ImageIcon visibilityOffIcon = new ImageIcon(new ImageIcon("src/resources/visibility_off.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-		ImageIcon appNameLogo = new ImageIcon("src/resources/logo_landscape_252x90.png");
+		ImageIcon appNameLogo = new ImageIcon(new ImageIcon("src/resources/logo_landscape.png").getImage().getScaledInstance(252, 90, Image.SCALE_SMOOTH));
 		JLabel appNameLogoJL = new JLabel();
 		appNameLogoJL.setIcon(appNameLogo);
 		
