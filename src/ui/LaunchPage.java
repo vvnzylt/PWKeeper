@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -128,7 +130,7 @@ public class LaunchPage extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (usernameField.getText().equals("Enter your username")) {
 					usernameField.setText(null);
-					usernameField.setForeground(Color.black);
+					usernameField.setForeground(Color.BLACK);
 				}
 				
 				if (passwordField.getText().isEmpty()) {
@@ -161,6 +163,13 @@ public class LaunchPage extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
 				
+			}
+		});
+		
+		usernameField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				usernameField.setForeground(Color.BLACK);
 			}
 		});
 		
@@ -212,6 +221,10 @@ public class LaunchPage extends JFrame {
 					showOrHideBtn.setIcon(visibilityOffIcon);
 					passwordField.setEchoChar((char)0);
 				} else {
+					if (passwordField.getText().equals("Enter your password")) {
+						passwordField.setText("");
+						passwordField.setForeground(Color.BLACK);
+					}
 					showOrHideBtn.setIcon(visibilityOnIcon);
 					passwordField.setEchoChar('•');
 				}
