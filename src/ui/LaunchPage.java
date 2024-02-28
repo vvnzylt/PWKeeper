@@ -84,10 +84,12 @@ public class LaunchPage extends JFrame {
 		username.setFont(bodyFont);
 		username.setBounds(0, 0, 250, 40);
 		username.setBorder(new EmptyBorder(10, 10, 10, 10));
+		username.setForeground(Color.gray);
 		password.setFont(bodyFont);
 		password.setBounds(0, 50, 200, 40);
 		password.setBorder(new EmptyBorder(10, 10, 10, 10));
 		password.setEchoChar((char)0);
+		password.setForeground(Color.gray);
 		showOrHideBtn.setOpaque(true);
 		showOrHideBtn.setBounds(200, 50, 50, 40);
 		showOrHideBtn.setBackground(new Color(56, 56, 56));
@@ -129,6 +131,14 @@ public class LaunchPage extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if (username.getText().equals("Enter your username")) {
 					username.setText(null);
+					username.setForeground(Color.black);
+				}
+				
+				if (password.getText().isEmpty()) {
+					password.setForeground(Color.GRAY);
+					password.setEchoChar((char)0);
+					showOrHideBtn.setIcon(visibilityOffIcon);
+					password.setText("Enter your password");
 				}
 			}
 
@@ -164,6 +174,12 @@ public class LaunchPage extends JFrame {
 					password.setText(null);
 					password.setEchoChar('•');
 					showOrHideBtn.setIcon(visibilityOnIcon);
+					password.setForeground(Color.BLACK);
+				}
+				
+				if (username.getText().isEmpty()) {
+					username.setForeground(Color.GRAY);
+					username.setText("Enter your username");
 				}
 			}
 
