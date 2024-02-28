@@ -635,7 +635,7 @@ public class LoggedInPage extends JFrame {
 	
 	private void updateRightPanel(ItemDetails item) {
 		rightPanel.removeAll();
-		rightPanel.setPreferredSize(new Dimension(756, 1000));
+		rightPanel.setPreferredSize(new Dimension(756, 1020));
 		rightPanel.setLayout(null);
 		
 		JLabel addItemHeading = new JLabel("ITEM INFORMATION");
@@ -665,6 +665,9 @@ public class LoggedInPage extends JFrame {
 		JScrollPane notesValuePane = new JScrollPane(notesValue);
 		JButton editItemBtn = new JButton("Edit");
 		JButton deleteItemBtn = new JButton("Delete");
+		JLabel createdTimeLbl = new JLabel();
+		JLabel modifiedTimeLbl = new JLabel();
+		JLabel modifiedCounterLbl = new JLabel();
 		
 		MouseListener buttonMouseListener = new MouseListener() {
 			@Override
@@ -861,6 +864,11 @@ public class LoggedInPage extends JFrame {
 		deleteItemBtn.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
 		deleteItemBtn.setFocusPainted(false);
 		
+		createdTimeLbl.setBounds(100, 940, 550, 20);
+		createdTimeLbl.setFont(bodyFont);
+		createdTimeLbl.setForeground(new Color(128, 128, 128));
+		createdTimeLbl.setText("Created: " + item.getCreatedTime());
+		
 		primaryInfoPanel.add(itemNameLbl);
 		primaryInfoPanel.add(itemNameValue);
 		primaryInfoPanel.add(copyItemNameIconBtn);
@@ -882,6 +890,21 @@ public class LoggedInPage extends JFrame {
 		rightPanel.add(notesValuePane);
 		rightPanel.add(editItemBtn);
 		rightPanel.add(deleteItemBtn);
+		rightPanel.add(createdTimeLbl);
+		
+		if (item.getModifiedCounter() >= 1) {
+			rightPanel.setPreferredSize(new Dimension(756, 1050));
+			modifiedTimeLbl.setBounds(100, 960, 550, 20);
+			modifiedTimeLbl.setFont(bodyFont);
+			modifiedTimeLbl.setForeground(new Color(128, 128, 128));
+			modifiedTimeLbl.setText("Last modified: " + item.getModifiedTime());
+			modifiedCounterLbl.setBounds(100, 980, 550, 20);
+			modifiedCounterLbl.setFont(bodyFont);
+			modifiedCounterLbl.setForeground(new Color(128, 128, 128));
+			modifiedCounterLbl.setText("Edited how many times: " + item.getModifiedCounter());
+			rightPanel.add(modifiedTimeLbl);
+			rightPanel.add(modifiedCounterLbl);
+		}
 		
 		rightPanel.revalidate();
 		rightPanel.repaint();

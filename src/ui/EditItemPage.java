@@ -313,6 +313,7 @@ public class EditItemPage extends JFrame {
 					item.setPassword(passwordValue);
 					item.setURL(urlValue);
 					item.setNotes(notesValue);
+					item.setModifiedTime();
 					
 					((LoggedInPage) loggedInPageJFrame).updateRightPanelGUI(item);
 					loggedInPageJFrame.setEnabled(true);
