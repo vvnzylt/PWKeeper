@@ -24,6 +24,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -447,6 +449,7 @@ public class LoggedInPage extends JFrame {
 		ArrayList<ItemDetails> filteredItems = new ArrayList<>();
 		
 		if (query.isEmpty()) {
+			Collections.sort(itemList, Comparator.comparing(ItemDetails::getItemName));
 			updateLeftPanel(itemList);
 			return;
         }
@@ -457,6 +460,7 @@ public class LoggedInPage extends JFrame {
 			}
 		}
 		
+		Collections.sort(filteredItems, Comparator.comparing(ItemDetails::getItemName));
 		updateLeftPanel(filteredItems);
 	}
 	
@@ -779,6 +783,7 @@ public class LoggedInPage extends JFrame {
 	}
 	
 	public void updateLeftPanelGUI() {
+		Collections.sort(itemList, Comparator.comparing(ItemDetails::getItemName));
 		updateLeftPanel(itemList);
 	}
 	
