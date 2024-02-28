@@ -416,7 +416,7 @@ public class LoggedInPage extends JFrame {
 			noDataInfoLabel.setText("There are no items to list.");
 			
 			noDataInfoLabel.setFont(bodyFont);
-			noDataInfoLabel.setForeground(Color.WHITE);
+			noDataInfoLabel.setForeground(new Color(226, 226, 226));
 			
 			imagePanel.add(noDataImgLabel, gbc);
 			gbc.gridy++;
@@ -483,16 +483,16 @@ public class LoggedInPage extends JFrame {
 			Collections.sort(itemList, Comparator.comparing(ItemDetails::getItemName));
 			updateLeftPanel(itemList);
 			return;
+        } else {
+        	for (ItemDetails item : itemList) {
+    			if (item.getUsername().toLowerCase().contains(query) || item.getItemName().toLowerCase().contains(query) || item.getNotes().toLowerCase().contains(query)) {
+    				filteredItems.add(item);
+    			}
+    		}
+    		
+    		Collections.sort(filteredItems, Comparator.comparing(ItemDetails::getItemName));
+    		updateLeftPanel(filteredItems);
         }
-		
-		for (ItemDetails item : itemList) {
-			if (item.getUsername().toLowerCase().contains(query) || item.getItemName().toLowerCase().contains(query) || item.getNotes().toLowerCase().contains(query)) {
-				filteredItems.add(item);
-			}
-		}
-		
-		Collections.sort(filteredItems, Comparator.comparing(ItemDetails::getItemName));
-		updateLeftPanel(filteredItems);
 	}
 	
 	private void updateRightPanel(ItemDetails item) {
@@ -820,6 +820,8 @@ public class LoggedInPage extends JFrame {
 	
 	private void resetRightPanel() {
 		rightPanel.removeAll();
+		
+		
 		rightPanel.revalidate();
 		rightPanel.repaint();
 	}
