@@ -614,7 +614,7 @@ public class LoggedInPage extends JFrame {
 	}
 	
 	private void searchAndSortLeftPanel() {
-		String query = searchField.getText().toLowerCase();
+		String query = searchField.getText().toLowerCase().trim();
 		ArrayList<ItemDetails> filteredItems = new ArrayList<>();
 		
 		if (query.isEmpty()) {
