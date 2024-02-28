@@ -5,9 +5,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -28,6 +32,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -397,47 +402,73 @@ public class LoggedInPage extends JFrame {
 	
 	private void updateLeftPanel(ArrayList<ItemDetails> items) {
 		leftPanel.removeAll(); // Clear existing components
-		for (ItemDetails item : items) {
-			JPanel itemPanel = new JPanel(new BorderLayout());
-			itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-			itemPanel.setPreferredSize(new Dimension(324, 70));
-			itemPanel.setMaximumSize(new Dimension(324, 70));
-			itemPanel.setBackground(new Color(226, 226, 226));
+		
+		if (items.isEmpty()) {
+			ImageIcon noDataImg = new ImageIcon(new ImageIcon("src/resources/no_data.png").getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+			JPanel imagePanel = new JPanel(new GridBagLayout());
+			GridBagConstraints gbc = new GridBagConstraints();
+			gbc.gridx = 0;
+			gbc.gridy = 0;
+			gbc.insets = new Insets(5, 5, 5, 5);
+			JLabel noDataImgLabel = new JLabel(noDataImg);
+			JLabel noDataInfoLabel = new JLabel("No items added.");
 			
-			ImageIcon icon = new ImageIcon(getClass().getResource("/resources/logo_without_text.png"));
-			Image scaledIcon = icon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-			icon = new ImageIcon(scaledIcon);
+			noDataInfoLabel.setText("There are no items to list.");
 			
-			JLabel iconLabel = new JLabel(icon);
-			iconLabel.setBackground(null);
-			iconLabel.setPreferredSize(new Dimension(70, 70));
-			itemPanel.add(iconLabel, BorderLayout.WEST);
+			noDataInfoLabel.setFont(bodyFont);
+			noDataInfoLabel.setForeground(Color.WHITE);
 			
-			JPanel textPanel = new JPanel();
-			textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
-			textPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-			textPanel.setBackground(null);
+			imagePanel.add(noDataImgLabel, gbc);
+			gbc.gridy++;
+			imagePanel.add(noDataInfoLabel, gbc);
+			imagePanel.setBackground(null);
 			
-			JLabel nameLabel = new JLabel(item.getItemName());
-			nameLabel.setFont(headingFont);
-			textPanel.add(nameLabel);
-			
-			JLabel usernameLabel = new JLabel(item.getUsername());
-			usernameLabel.setFont(bodyFont);
-			textPanel.add(usernameLabel);
-			
-			itemPanel.add(textPanel, BorderLayout.CENTER);
-			
-			leftPanel.add(itemPanel);
-			
-			itemPanel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					// Display details of the clicked item on rightPanel
-					updateRightPanel(item);
-					resetView();
-				}
-			});
+			leftPanel.add(imagePanel);
+			leftPanel.revalidate();
+			leftPanel.repaint();
+		} else {
+			for (ItemDetails item : items) {
+				JPanel itemPanel = new JPanel(new BorderLayout());
+				itemPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				itemPanel.setPreferredSize(new Dimension(324, 70));
+				itemPanel.setMaximumSize(new Dimension(324, 70));
+				itemPanel.setBackground(new Color(226, 226, 226));
+				
+				ImageIcon icon = new ImageIcon(getClass().getResource("/resources/logo_without_text.png"));
+				Image scaledIcon = icon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+				icon = new ImageIcon(scaledIcon);
+				
+				JLabel iconLabel = new JLabel(icon);
+				iconLabel.setBackground(null);
+				iconLabel.setPreferredSize(new Dimension(70, 70));
+				itemPanel.add(iconLabel, BorderLayout.WEST);
+				
+				JPanel textPanel = new JPanel();
+				textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+				textPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+				textPanel.setBackground(null);
+				
+				JLabel nameLabel = new JLabel(item.getItemName());
+				nameLabel.setFont(headingFont);
+				textPanel.add(nameLabel);
+				
+				JLabel usernameLabel = new JLabel(item.getUsername());
+				usernameLabel.setFont(bodyFont);
+				textPanel.add(usernameLabel);
+				
+				itemPanel.add(textPanel, BorderLayout.CENTER);
+				
+				leftPanel.add(itemPanel);
+				
+				itemPanel.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						// Display details of the clicked item on rightPanel
+						updateRightPanel(item);
+						resetView();
+					}
+				});
+			}
 		}
         
 		leftPanel.revalidate();
