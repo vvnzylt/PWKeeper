@@ -117,8 +117,6 @@ public class LoggedInPage extends JFrame {
 		leftPanelScrollPane.setBorder(null);
 		
 		rightPanel.setBackground(new Color(26, 26, 26));
-		rightPanel.setPreferredSize(new Dimension(756, 1000));
-		rightPanel.setLayout(null);
 		
 		rightPanelScrollPane = new JScrollPane(rightPanel);
 		rightPanelScrollPane.getVerticalScrollBar().setUnitIncrement(16);
@@ -240,6 +238,7 @@ public class LoggedInPage extends JFrame {
 		});
 		
 		searchAndSortLeftPanel();
+		resetRightPanel();
 	}
 	
 	private void showDeletedItemSuccessDialog() {
@@ -497,6 +496,8 @@ public class LoggedInPage extends JFrame {
 	
 	private void updateRightPanel(ItemDetails item) {
 		rightPanel.removeAll();
+		rightPanel.setPreferredSize(new Dimension(756, 1000));
+		rightPanel.setLayout(null);
 		
 		JLabel addItemHeading = new JLabel("ITEM INFORMATION");
 		
@@ -820,8 +821,23 @@ public class LoggedInPage extends JFrame {
 	
 	private void resetRightPanel() {
 		rightPanel.removeAll();
+		rightPanel.setLayout(new BorderLayout());
+		rightPanel.setPreferredSize(null);
 		
+		ImageIcon logoImg = new ImageIcon(new ImageIcon("src/resources/logo_landscape_bw.png").getImage().getScaledInstance(258, 60, Image.SCALE_SMOOTH));
+		JPanel imagePanel = new JPanel(new GridBagLayout());
 		
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(5, 5, 5, 5);
+		
+		JLabel logoImgLabel = new JLabel(logoImg);
+		
+		imagePanel.add(logoImgLabel, gbc);
+		imagePanel.setBackground(null);
+		
+		rightPanel.add(imagePanel);
 		rightPanel.revalidate();
 		rightPanel.repaint();
 	}
