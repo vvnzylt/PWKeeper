@@ -33,7 +33,7 @@ public class AccountAuth {
 			} else if (AccountDB.getAccount().get(i).getUsername().equals(usernameValue) && AccountDB.getAccount().get(i).getPassword().equals(passwordValue)) {
 				AccountDB.setLoggedInAccountIndex(i);
 				isAccountLoggedIn = true;
-				System.out.println("LaunchPage.java: Account logged-in with username \"" + usernameValue + "\"");
+				System.out.println("AccountAuth.java: Account has been logged-in with username \"" + usernameValue + "\"");
 				showDialog("SUCCESSFUL_LOGIN");
 				break;
 			}
@@ -93,7 +93,7 @@ public class AccountAuth {
 				showDialog("EMPTY_FIELD");
 			} else {
 				AccountDB.getAccount().add(new AccountDB(usernameValue, passwordValue));
-				System.out.println("AccountAuth.java: Account registered with username \"" + usernameValue + "\"");
+				System.out.println("AccountAuth.java: Account has been registered with username \"" + usernameValue + "\"");
 				showDialog("SUCCESSFULLY_REGISTERED");
 			}
 		}

@@ -353,6 +353,7 @@ public class LoggedInPage extends JFrame {
 	        	launchPage.setVisible(true);
 	        	logoutFrame.dispose();
 	        	dispose();
+	        	System.out.println("LoggedInPage.java: Account has been logged out.");
 			}
 		});
 		
@@ -478,6 +479,7 @@ public class LoggedInPage extends JFrame {
 				updateLeftPanelGUI();
 				resetRightPanel();
 				deleteFrame.dispose();
+				System.out.println("LoggedInPage.java: Item named \"" + item.getItemName()+ "\" been deleted.");
 			}
 
 			@Override

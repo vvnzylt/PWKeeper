@@ -318,6 +318,7 @@ public class EditItemPage extends JFrame {
 					loggedInPageJFrame.setEnabled(true);
 					((LoggedInPage) loggedInPageJFrame).updateLeftPanelGUI();
 					EditItemPage.this.dispose();
+					System.out.println("EditItemPage.java: Item details has been changed.");
 				}
 			}
 		});

@@ -307,7 +307,7 @@ public class AddItemPage extends JFrame {
 					String notesValue = notesTxtArea.getText();
 					
 					AccountDB.getAccount().get(AccountDB.getLoggedInAccountIndex()).addAccountDetails(itemNameValue, usernameValue, passwordValue, urlValue, notesValue);
-					System.out.println("AddItemPage.java: Item added");
+					System.out.println("AddItemPage.java: Item named \"" + itemNameValue + "\" has been added.");
 					loggedInPageJFrame.setEnabled(true);
 					((LoggedInPage) loggedInPageJFrame).updateLeftPanelGUI();
 					dispose();
