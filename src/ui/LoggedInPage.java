@@ -399,6 +399,124 @@ public class LoggedInPage extends JFrame {
 		});
 	}
 	
+	private void showDeleteConfirmationDialog(ItemDetails item) {
+		LoggedInPage.this.setEnabled(false);
+		
+		JFrame deleteFrame = new JFrame();
+		ImageIcon questionMarkIcon = new ImageIcon(new ImageIcon("src/resources/question_mark.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+		
+		deleteFrame.setIconImage(appIcon);
+		deleteFrame.setTitle("Delete");
+		deleteFrame.setLocation(700, 330);
+		deleteFrame.setSize(220, 160);
+		deleteFrame.setVisible(true);
+		deleteFrame.getContentPane().setBackground(new Color(26, 26, 26));
+		deleteFrame.setLayout(null);
+		
+		JLabel iconLbl = new JLabel();
+		iconLbl.setIcon(questionMarkIcon);
+		iconLbl.setBounds(25, 25, 30, 30);
+		
+		JLabel askUserLbl = new JLabel("Delete this item?");
+		askUserLbl.setFont(bodyFont);
+		askUserLbl.setBounds(60, 23, 200, 30);
+		askUserLbl.setForeground(new Color(228, 228, 228));
+		
+		JButton yesBtn = new JButton("Yes");
+		yesBtn.setFont(bodyFont);
+		yesBtn.setBounds(45, 65, 60, 30);
+		yesBtn.setBackground(new Color (40, 40, 40));
+		yesBtn.setForeground(new Color(192, 192, 192));
+		yesBtn.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
+		yesBtn.setFocusPainted(false);
+		
+		JButton noBtn = new JButton("No");
+		noBtn.setFont(bodyFont);
+		noBtn.setBounds(115, 65, 60, 30);
+		noBtn.setBackground(new Color (40, 40, 40));
+		noBtn.setForeground(new Color(192, 192, 192));
+		noBtn.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 1));
+		noBtn.setFocusPainted(false);		
+		
+		deleteFrame.add(iconLbl);
+		deleteFrame.add(askUserLbl);
+		deleteFrame.add(yesBtn);
+		deleteFrame.add(noBtn);
+		
+		deleteFrame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				LoggedInPage.this.setEnabled(true);
+				}
+			});
+		
+		yesBtn.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				LoggedInPage.this.setEnabled(true);
+				AccountDB.getAccount().get(AccountDB.getLoggedInAccountIndex()).removeItem(item);
+				showDeletedItemSuccessDialog();
+				updateLeftPanelGUI();
+				resetRightPanel();
+				deleteFrame.dispose();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				yesBtn.setBackground(new Color (60, 60, 60));
+				yesBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				yesBtn.setBackground(new Color (40, 40, 40));
+			}
+		});
+		
+		noBtn.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				LoggedInPage.this.setEnabled(true);
+				deleteFrame.dispose();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				noBtn.setBackground(new Color (60, 60, 60));
+				noBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				noBtn.setBackground(new Color (40, 40, 40));
+			}
+		});
+	}
+	
 	private void updateLeftPanel(ArrayList<ItemDetails> items) {
 		leftPanel.removeAll(); // Clear existing components
 		
@@ -783,10 +901,7 @@ public class LoggedInPage extends JFrame {
 		deleteItemBtn.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				AccountDB.getAccount().get(AccountDB.getLoggedInAccountIndex()).removeItem(item);
-				showDeletedItemSuccessDialog();
-				updateLeftPanelGUI();
-				resetRightPanel();
+				showDeleteConfirmationDialog(item);
 			}
 
 			@Override
