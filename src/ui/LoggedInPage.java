@@ -605,6 +605,11 @@ public class LoggedInPage extends JFrame {
 						updateRightPanel(item);
 						resetView();
 					}
+					
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						itemPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+					}
 				});
 			}
 		}
