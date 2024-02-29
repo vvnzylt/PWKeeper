@@ -888,6 +888,29 @@ public class LoggedInPage extends JFrame {
 		websitePanel.add(websiteValue);
 		websitePanel.add(copyWebsiteIconBtn);
 		
+		if (item.getUsername().isEmpty()) {
+			usernameValue.setText("N/A");
+			usernameLbl.setForeground(new Color(96, 96, 96));
+			usernameValue.setForeground(new Color(64, 64, 64));
+			primaryInfoPanel.remove(copyUsernameIconBtn);
+		}
+		
+		if (item.getPassword().isEmpty()) {
+			passwordValue.setText("N/A");
+			passwordLbl.setForeground(new Color(96, 96, 96));
+			passwordValue.setForeground(new Color(64, 64, 64));
+			primaryInfoPanel.remove(togglePasswordVisibilityIconBtn);
+			primaryInfoPanel.remove(copyPasswordIconBtn);
+			passwordValue.setEchoChar((char)0);
+		}
+		
+		if (item.getURL().isEmpty()) {
+			websiteValue.setText("N/A");
+			websiteLbl.setForeground(new Color(96, 96, 96));
+			websiteValue.setForeground(new Color(64, 64, 64));
+			websitePanel.remove(copyWebsiteIconBtn);
+		}
+		
 		rightPanel.add(addItemHeading);
 		rightPanel.add(primaryInfoPanel);
 		rightPanel.add(websitePanel);
