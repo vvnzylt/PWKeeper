@@ -24,7 +24,7 @@ public class AccountAuth {
 	private static Font bodyFont = new Font("Helvetica", Font.PLAIN, 16); 
 	private static Image appIcon = Toolkit.getDefaultToolkit().getImage("src/resources/logo_without_text.png");
 	
-	public static void loginAccount(String usernameValue, String passwordValue, JButton loginBtn) {
+	public static void loginAccount(String usernameValue, String passwordValue) {
 		for (int i = 0; i < AccountDB.getAccount().size(); i++) {
 			if (usernameValue.isEmpty() || usernameValue.trim().isEmpty() || passwordValue.trim().isEmpty() || passwordValue.isEmpty()) {
 				System.out.println("AccountAuth.java: Can't login. One of the text fields cannot be empty.");
@@ -44,8 +44,8 @@ public class AccountAuth {
 			}
 		}
 		
-		// This will trigger the code whenever user attempts to login whenever there are no
-		// registered accounts in the database
+		// This code will trigger whenever a user attempts to log in when
+		// there are no registered accounts in the database.
 		if (AccountDB.getAccount().size() == 0) {
 			if (usernameValue.isEmpty() || usernameValue.trim().isEmpty() || passwordValue.trim().isEmpty() || passwordValue.isEmpty()) {
 				showDialog("EMPTY_FIELD");
@@ -64,7 +64,7 @@ public class AccountAuth {
 		isAccountLoggedIn = status;
 	}
 	
-	public static void registerAccount(String usernameValue, String passwordValue, JButton registerBtn) {
+	public static void registerAccount(String usernameValue, String passwordValue) {
 		boolean isExistingAccountFound = true; // Temporary initialization; value does not mean anything
 		
 		// This loop checks if the entered username already exist on the temporary database.
@@ -97,10 +97,6 @@ public class AccountAuth {
 				showDialog("SUCCESSFULLY_REGISTERED");
 			}
 		}
-	}
-	
-	public static void getListOfAccountDetails() {
-		AccountDB.getAccount().get(AccountDB.getLoggedInAccountIndex()).getListOfAccountDetails();
 	}
 	
 	private static void showDialog(String value) {

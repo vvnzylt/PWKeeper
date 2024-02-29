@@ -47,11 +47,4 @@ public class AccountDB {
 	public void removeItem(ItemDetails accountItem) {
 		item.remove(accountItem);
 	}
-	
-	public void getListOfAccountDetails() {
-		for (int i = 0; i < item.size(); i++) {
-			System.out.println("Account #" + (i+1));
-			item.get(i).getFullDetails();
-		}
-	}
 }

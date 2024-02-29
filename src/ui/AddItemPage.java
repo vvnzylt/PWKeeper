@@ -140,12 +140,9 @@ public class AddItemPage extends JFrame {
 		togglePasswordVisibilityIcon.setOpaque(true);
 		togglePasswordVisibilityIcon.setBounds(375, 200, 50, 40);
 		togglePasswordVisibilityIcon.setBackground(new Color(56, 56, 56));
-//		togglePasswordVisibilityIcon.setForeground(new Color(56, 56, 56));
-//		togglePasswordVisibilityIcon.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 3, new Color(40, 40, 40)));
 		generatePasswordDialogBtn.setOpaque(true);
 		generatePasswordDialogBtn.setBounds(430, 200, 50, 40);
 		generatePasswordDialogBtn.setBackground(new Color(56, 56, 56));
-//		generatePasswordDialogBtn.setForeground(new Color(56, 56, 56));
 
 		urlLbl.setFont(bodyFont);
 		urlLbl.setBounds(15, 250, 90, 30);
@@ -186,7 +183,6 @@ public class AddItemPage extends JFrame {
 		notesTxtArea.setBorder(new EmptyBorder(15, 15, 15, 15));
 		notesTxtArea.setCaretColor(Color.white);
 		
-//		notesTxtAreaPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		notesTxtAreaPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		notesTxtAreaPane.setPreferredSize(new Dimension(500, 100));
 		notesTxtAreaPane.setBorder(new LineBorder(Color.RED, 0));
@@ -376,9 +372,6 @@ public class AddItemPage extends JFrame {
 		generatedPasswordLbl.setFont(headingFont);
 		generatedPasswordLbl.setBounds(30, 100, 270, 20);
 		generatedPasswordLbl.setForeground(new Color(228, 228, 228));
-//		generatedPasswordLbl.setOpaque(true);
-//		generatedPasswordLbl.setBackground(new Color(192, 192, 192));
-//		generatedPasswordLbl.setForeground(new Color(56, 56, 56));
 		generatedPasswordLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		generatedPasswordLbl.setVerticalAlignment(SwingConstants.CENTER);
         
@@ -386,9 +379,6 @@ public class AddItemPage extends JFrame {
 		numberOfCharactersLbl.setFont(bodyFont);
 		numberOfCharactersLbl.setBounds(85, 125, 150, 20);
 		numberOfCharactersLbl.setForeground(new Color(192, 192, 192));
-//		numberOfCharactersLbl.setOpaque(true);
-//		numberOfCharactersLbl.setBackground(new Color(192, 192, 192));
-//		numberOfCharactersLbl.setForeground(new Color(56, 56, 56));
 		numberOfCharactersLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		numberOfCharactersLbl.setVerticalAlignment(SwingConstants.CENTER);
 		

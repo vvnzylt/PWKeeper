@@ -386,9 +386,6 @@ public class EditItemPage extends JFrame {
 		generatedPasswordLbl.setFont(headingFont);
 		generatedPasswordLbl.setBounds(30, 100, 270, 20);
 		generatedPasswordLbl.setForeground(new Color(228, 228, 228));
-//		generatedPasswordLbl.setOpaque(true);
-//		generatedPasswordLbl.setBackground(new Color(192, 192, 192));
-//		generatedPasswordLbl.setForeground(new Color(56, 56, 56));
 		generatedPasswordLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		generatedPasswordLbl.setVerticalAlignment(SwingConstants.CENTER);
         
@@ -396,9 +393,6 @@ public class EditItemPage extends JFrame {
 		numberOfCharactersLbl.setFont(bodyFont);
 		numberOfCharactersLbl.setBounds(85, 125, 150, 20);
 		numberOfCharactersLbl.setForeground(new Color(192, 192, 192));
-//		numberOfCharactersLbl.setOpaque(true);
-//		numberOfCharactersLbl.setBackground(new Color(192, 192, 192));
-//		numberOfCharactersLbl.setForeground(new Color(56, 56, 56));
 		numberOfCharactersLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		numberOfCharactersLbl.setVerticalAlignment(SwingConstants.CENTER);
 		

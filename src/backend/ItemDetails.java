@@ -23,14 +23,6 @@ public class ItemDetails {
 		this.createdTime = new Date();
 	}
 	
-	public void getFullDetails() {
-		System.out.println("Item name: " + itemName);
-		System.out.println("Username: " + username);
-		System.out.println("Password: " + password);
-		System.out.println("URL: " + url);
-		System.out.println("Notes: " + notes);
-	}
-	
 	public String getItemName() {
 		return itemName;
 	}

@@ -125,6 +125,7 @@ public class LaunchPage extends JFrame {
 		add(rightPanel);
 		
 		// MouseListener for clearing text fields when user clicks on those fields
+		// as well as changing password visibility
 		usernameField.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -262,7 +263,7 @@ public class LaunchPage extends JFrame {
 				String usernameValue = usernameField.getText();
 				String passwordValue = passwordField.getText();
 				
-				AccountAuth.loginAccount(usernameValue, passwordValue, loginBtn);
+				AccountAuth.loginAccount(usernameValue, passwordValue);
                 
 				if (AccountAuth.isAccountLoggedIn() == true) {
 					Timer timer = new Timer(1000, new ActionListener() {
@@ -313,7 +314,7 @@ public class LaunchPage extends JFrame {
 				String usernameValue = usernameField.getText();
 				String passwordValue = passwordField.getText();
 				
-				AccountAuth.registerAccount(usernameValue, passwordValue, registerBtn);
+				AccountAuth.registerAccount(usernameValue, passwordValue);
 			}
 		});
 		
