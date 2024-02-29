@@ -1033,7 +1033,7 @@ public class LoggedInPage extends JFrame {
 		updateRightPanel(item);
 	}
 	
-	private void resetView() {
+	public void resetView() {
 		rightPanelScrollPane.getViewport().setViewPosition(new Point(0,0));
 	}
 	
